@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".sem4.Sem4ExamList">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/semester_four_exams"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="phpExam"
+            android:text="@string/php"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="apacheExam"
+            android:text="@string/apache"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="mysqlExam"
+            android:text="@string/mysql"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="ajaxJavaExam"
+            android:text="@string/ajax_java"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="androidAppExam"
+            android:text="@string/android_app"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="testAndroidExam"
+            android:text="@string/test_android_app"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="javaWebServicesExam"
+            android:text="@string/java_web_services"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="cloudPlatformServiceExam"
+            android:text="@string/cloud_platform_service"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="EJBExam"
+            android:text="@string/EJB"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="softwareEngineeringExam"
+            android:text="@string/software_engineering"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="softwareProjectExam"
+            android:text="@string/software_project"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,8 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/lightBlack</item>
+        <item name="colorPrimaryDark">@color/darkBlack</item>
+        <item name="colorAccent">@color/lightBlue</item>
+    </style>
+</resources>

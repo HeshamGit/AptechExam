@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPagerActivity"
+    android:background="@color/background">
+
+    <com.mountaineers.myapplication.HackyViewPager
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/view_pager" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:id="@+id/page_num"
+        android:textColor="#1e88e5"
+        android:fontFamily="@font/roboto_regular"
+        android:layout_gravity="center_horizontal"/>
+
+
+</RelativeLayout>
+
+
+
+

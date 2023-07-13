@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".sem2.JavaExamList">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/java_exam"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/sample1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="OnclickSample"
+            android:text="@string/sample_1"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/sample2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="OnclickSample"
+            android:text="@string/sample_2"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/sample3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="OnclickSample"
+            android:text="@string/sample_3"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/sample4"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="OnclickSample"
+            android:text="@string/sample_4"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/sample5"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="OnclickSample"
+            android:text="@string/sample_5"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+        <Button
+            android:id="@+id/sample6"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_bg"
+            android:elevation="5dp"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="OnclickSample"
+            android:text="@string/sample_6"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_text_color"
+            android:textSize="17sp"
+            tools:ignore="UsingOnClickInXml"
+            tools:targetApi="lollipop" />
+
+    </LinearLayout>
+</ScrollView>

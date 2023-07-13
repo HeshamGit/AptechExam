@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mountaineers.myapplication">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".sem4.SoftwareProjectExamList"  />
+        <activity android:name=".sem4.SoftwareEngineeringExamList" />
+        <activity android:name=".sem4.EJBExamList" />
+        <activity android:name=".sem4.CloudPlatformServiceExamList" />
+        <activity android:name=".sem4.JavaWebServicesExamList" />
+        <activity android:name=".sem4.TestAndroidAppExamList" />
+        <activity android:name=".sem4.AjaxJavaExamList" />
+        <activity android:name=".sem4.MySQLExamList" />
+        <activity android:name=".sem4.AndroidAppExamList" />
+        <activity android:name=".sem4.ApacheExamList" />
+        <activity android:name=".sem4.PHPExamList" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ViewPagerActivity" />
+        <activity android:name=".sem2.IOTExamList" />
+        <activity android:name=".sem2.SEOExamList" />
+        <activity android:name=".sem2.RedHatExamList" />
+        <activity android:name=".sem2.CSharpExamList" />
+        <activity android:name=".sem2.JavaExamList" />
+        <activity
+            android:name=".ExamWeb"
+            android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
+        <activity android:name=".sem2.Sem2ExamList" />
+        <activity android:name=".sem4.Sem4ExamList" />
+    </application>
+
+</manifest>
