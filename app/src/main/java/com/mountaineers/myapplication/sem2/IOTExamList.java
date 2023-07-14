@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mountaineers.myapplication.ActivityUtils;
 import com.mountaineers.myapplication.ExamWeb;
 import com.mountaineers.myapplication.R;
 
@@ -19,18 +20,10 @@ public class IOTExamList extends AppCompatActivity {
     }
 
     public void OnclickSample(View view) {
-        //casting and get the name of the btn
-        Button btn = findViewById(view.getId());
-        String btnName = btn.getText().toString().trim().toLowerCase();
-        //get the name of the sample
-        String sample = btnName.substring(0, 6) + btnName.substring(7);
+        // get the sample name
+        String sample = ((Button) view).getText().toString().replaceAll("\\s", "").toLowerCase();
 
-        Intent intent = new Intent(this, ExamWeb.class);
-
-        //to show the caller activity and sample NO
-        intent.putExtra("caller", "iot");
-        intent.putExtra("iot", sample);
-        //start the activity
-        startActivity(intent);
+        //call the method to open the exam sampled
+        ActivityUtils.startExamActivity(this, ExamWeb.class, "iot", sample);
     }
 }

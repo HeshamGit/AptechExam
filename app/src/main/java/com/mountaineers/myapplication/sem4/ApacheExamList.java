@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.mountaineers.myapplication.ActivityUtils;
 import com.mountaineers.myapplication.ExamWeb;
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.ViewPagerActivity;
@@ -20,27 +21,24 @@ public class ApacheExamList extends AppCompatActivity {
     }
 
     public void OnclickSample(View view) {
-        //casting and get the name of the btn
-        Button btn = findViewById(view.getId());
-        String btnName = btn.getText().toString().trim().toLowerCase();
-        //get the name of the sample
-        String sample = btnName.substring(0, 6) + btnName.substring(7);
+        // get the sample name
+        String sample = ((Button) view).getText().toString().replaceAll("\\s", "").toLowerCase();
 
-        //declare the var
-        Intent intent;
+        // initialize var
         String callerVal;
-        //check from sample type image or html
-        if (sample.equals("sample13") ) {
-            intent = new Intent(this, ViewPagerActivity.class);
+        Class<?> activityClass;
+
+        // check if the sample is img or not
+        if (sample.equals("sample13")){
             callerVal = "apacheImg";
-        } else {
-            intent = new Intent(this, ExamWeb.class);
-            callerVal = "apache";
+            activityClass = ViewPagerActivity.class;
         }
-        //to show the caller activity and sample NO
-        intent.putExtra("caller", callerVal);
-        intent.putExtra(callerVal, sample);
-        //start the activity
-        startActivity(intent);
+        else {
+            callerVal = "apache";
+            activityClass = ExamWeb.class;
+        }
+
+        //call the method to open the exam sampled
+        ActivityUtils.startExamActivity(this, activityClass, callerVal, sample);
     }
 }
