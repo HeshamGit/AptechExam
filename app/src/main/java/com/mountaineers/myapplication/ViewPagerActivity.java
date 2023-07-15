@@ -120,11 +120,6 @@ public class ViewPagerActivity extends AppCompatActivity {
             pageNum.setText((currentPage + "/" + totalPage));
         }
 
-        //to add the page num when the activity start
-//        if (savedInstanceState == null) {
-//            pageNum.setText((currentPage + "/" + totalPage));
-//        }
-
         //adding on change Listener to update the page number
         imageViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

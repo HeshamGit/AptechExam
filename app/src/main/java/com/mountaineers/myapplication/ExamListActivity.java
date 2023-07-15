@@ -1,0 +1,217 @@
+package com.mountaineers.myapplication;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ExamListActivity extends AppCompatActivity {
+
+    private Map<String, Integer> subjectTitles;
+    private Map<String, List<SampleExam>> subjectSampleExams;
+
+    private String subject;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_exam_list);
+
+        ListView listViewExams = findViewById(R.id.listViewExams);
+
+        // Retrieve the subject name from the intent
+        subject = getIntent().getStringExtra("subject");
+
+        // Initialize subject titles and sample exams mappings
+        initializeSubjectTitles();
+        initializeSubjectSampleExams();
+
+        // Set the title based on the subject
+        TextView examTitle = findViewById(R.id.examTitle);
+        examTitle.setText(getSubjectTitle(subject));
+
+        // Set the appropriate sample exams list based on the subject
+        List<SampleExam> sampleExams = getSampleExams(subject);
+
+        // Create the adapter and set it to the ListView
+        ExamListAdapter adapter = new ExamListAdapter(this, sampleExams);
+
+        listViewExams.setAdapter(adapter);
+    }
+
+    private void initializeSubjectTitles() {
+        // Initialize the subject titles
+        subjectTitles = new HashMap<>();
+        subjectTitles.put("java", R.string.java_exam);
+        subjectTitles.put("cSharp", R.string.csharp_exam);
+        subjectTitles.put("iot", R.string.iot_exam);
+        subjectTitles.put("red_hat", R.string.read_hat_exam);
+        subjectTitles.put("seo", R.string.seo_exam);
+        subjectTitles.put("ms_project", R.string.software_project_exam);
+        subjectTitles.put("soft_eng", R.string.software_engineering_exam);
+        subjectTitles.put("ejb", R.string.ejb_exam);
+        subjectTitles.put("cloud_platform", R.string.cloud_platform_service_exam);
+        subjectTitles.put("java_web_services", R.string.java_web_services_exam);
+        subjectTitles.put("testing_android", R.string.test_android_app_exam);
+        subjectTitles.put("android_app", R.string.android_app_exam);
+        subjectTitles.put("ajax_Java", R.string.ajax_java_exam);
+        subjectTitles.put("mysql", R.string.mysql_exam);
+        subjectTitles.put("apache", R.string.apache_exam);
+        subjectTitles.put("php", R.string.php_exam);
+    }
+
+    private void initializeSubjectSampleExams() {
+        // Initialize the subject sample exams
+        subjectSampleExams = new HashMap<>();
+        subjectSampleExams.put("java", getJavaSampleExams());
+        subjectSampleExams.put("cSharp", getCsharpSampleExams());
+        subjectSampleExams.put("iot", getIOTSampleExams());
+        subjectSampleExams.put("red_hat", getRedHatSampleExams());
+        subjectSampleExams.put("seo", getSEOSampleExams());
+        subjectSampleExams.put("ms_project", getMSPProjectSampleExams());
+        subjectSampleExams.put("soft_eng", getSoftwareEngineeringSampleExams());
+        subjectSampleExams.put("ejb", getEJBSampleExams());
+        subjectSampleExams.put("cloud_platform", getCloudPlatformSampleExams());
+        subjectSampleExams.put("java_web_services", getJavaWebServicesSampleExams());
+        subjectSampleExams.put("testing_android", getTestingAndroidSampleExams());
+        subjectSampleExams.put("android_app", getAndroidAppSampleExams());
+        subjectSampleExams.put("ajax_Java", getAjaxJavaSampleExams());
+        subjectSampleExams.put("mysql", getMySQLSampleExams());
+        subjectSampleExams.put("apache", getApacheSampleExams());
+        subjectSampleExams.put("php", getPHPSampleExams());
+    }
+
+    // to get title of the list view
+    private String getSubjectTitle(String subject) {
+        Integer titleResId = subjectTitles.get(subject);
+        return (titleResId != null) ? getString(titleResId) : "";
+    }
+
+    // to get sample exams list
+    private List<SampleExam> getSampleExams(String subject) {
+        List<SampleExam> exams = subjectSampleExams.get(subject);
+        return (exams != null) ? exams : new ArrayList<>();
+    }
+
+    // Helper method to add sample exams to the list
+    private void addSampleExams(List<SampleExam> sampleExams, int count) {
+        for (int i = 1; i <= count; i++) {
+            sampleExams.add(new SampleExam(ExamWeb.class, subject, "Sample" + " " + i));
+        }
+    }
+
+    // Generate sample exams for Java subject
+    private List<SampleExam> getJavaSampleExams() {
+        List<SampleExam> javaExams = new ArrayList<>();
+        addSampleExams(javaExams, 5);
+        javaExams.add(new SampleExam(ViewPagerActivity.class, "javaImg", "Sample 6"));
+        return javaExams;
+    }
+
+    // Generate sample exams for C# subject
+    private List<SampleExam> getCsharpSampleExams() {
+        List<SampleExam> CsharpExams = new ArrayList<>();
+        addSampleExams(CsharpExams, 5);
+        CsharpExams.add(new SampleExam(ViewPagerActivity.class, "cSharpImg", "Sample 6"));
+        CsharpExams.add(new SampleExam(ViewPagerActivity.class, "cSharpPdf", "Sample 7"));
+        return CsharpExams;
+    }
+
+    private List<SampleExam> getRedHatSampleExams() {
+        List<SampleExam> redHatExams = new ArrayList<>();
+        addSampleExams(redHatExams, 11);
+        redHatExams.add(new SampleExam(ViewPagerActivity.class, "linuxImg", "Sample 12"));
+        redHatExams.add(new SampleExam(ViewPagerActivity.class, "linuxPdf", "Sample 13"));
+        return redHatExams;
+    }
+
+    private List<SampleExam> getIOTSampleExams() {
+        List<SampleExam> iotExams = new ArrayList<>();
+        iotExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        return iotExams;
+    }
+
+    private List<SampleExam> getSEOSampleExams() {
+        List<SampleExam> iotExams = new ArrayList<>();
+        iotExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        iotExams.add(new SampleExam(ViewPagerActivity.class, "SeoPdf", "Sample 2"));
+        return iotExams;
+    }
+
+    // semester four exam
+    private List<SampleExam> getMSPProjectSampleExams() {
+        List<SampleExam> msProjectExams = new ArrayList<>();
+        addSampleExams(msProjectExams, 9);
+        return msProjectExams;
+    }
+
+    private List<SampleExam> getSoftwareEngineeringSampleExams() {
+        List<SampleExam> softwareEngineeringExams = new ArrayList<>();
+        addSampleExams(softwareEngineeringExams, 10);
+        return softwareEngineeringExams;
+    }
+
+    private List<SampleExam> getEJBSampleExams() {
+        List<SampleExam> ejbExams = new ArrayList<>();
+        ejbExams.add(new SampleExam(ExamWeb.class, "ejb", "Sample 1"));
+        return ejbExams;
+    }
+
+    private List<SampleExam> getCloudPlatformSampleExams() {
+        List<SampleExam> cloudPlatformExams = new ArrayList<>();
+        addSampleExams(cloudPlatformExams, 5);
+        return cloudPlatformExams;
+    }
+
+    private List<SampleExam> getJavaWebServicesSampleExams() {
+        List<SampleExam> javaWebServicesExams = new ArrayList<>();
+        addSampleExams(javaWebServicesExams, 3);
+        return javaWebServicesExams;
+    }
+
+    private List<SampleExam> getTestingAndroidSampleExams() {
+        List<SampleExam> testingAndroidExams = new ArrayList<>();
+        addSampleExams(testingAndroidExams, 2);
+        return testingAndroidExams;
+    }
+
+    private List<SampleExam> getAndroidAppSampleExams() {
+        List<SampleExam> androidAppExams = new ArrayList<>();
+        addSampleExams(androidAppExams, 4);
+        androidAppExams.add(new SampleExam(ViewPagerActivity.class, "androidAppImg", "Sample 5"));
+        return androidAppExams;
+    }
+
+    private List<SampleExam> getAjaxJavaSampleExams() {
+        List<SampleExam> ajaxJavaExams = new ArrayList<>();
+        addSampleExams(ajaxJavaExams, 3);
+        return ajaxJavaExams;
+    }
+
+    private List<SampleExam> getMySQLSampleExams() {
+        List<SampleExam> mySQLExams = new ArrayList<>();
+        addSampleExams(mySQLExams, 13);
+        return mySQLExams;
+    }
+
+    private List<SampleExam> getApacheSampleExams() {
+        List<SampleExam> apacheExams = new ArrayList<>();
+        addSampleExams(apacheExams, 12);
+        apacheExams.add(new SampleExam(ViewPagerActivity.class, "apacheImg", "Sample 13"));
+        return apacheExams;
+    }
+
+    private List<SampleExam> getPHPSampleExams() {
+        List<SampleExam> phpExams = new ArrayList<>();
+        addSampleExams(phpExams, 4);
+        return phpExams;
+    }
+
+}

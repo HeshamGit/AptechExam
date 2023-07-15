@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mountaineers.myapplication.ExamListActivity;
 import com.mountaineers.myapplication.R;
 
 public class Sem2ExamList extends AppCompatActivity {
@@ -17,27 +18,28 @@ public class Sem2ExamList extends AppCompatActivity {
     }
 
     public void javaExam(View view) {
-        Intent intent = new Intent(this, JavaExamList.class);
-        startActivity(intent);
+        startExamListActivity("java");
     }
 
     public void CSharpExam(View view) {
-        Intent intent = new Intent(this, CSharpExamList.class);
-        startActivity(intent);
+        startExamListActivity("cSharp");
     }
 
     public void ReadHatExam(View view) {
-        Intent intent = new Intent(this, RedHatExamList.class);
-        startActivity(intent);
+        startExamListActivity("red_hat");
     }
 
     public void SEOExam(View view) {
-        Intent intent = new Intent(this, SEOExamList.class);
-        startActivity(intent);
+        startExamListActivity("seo");
     }
 
     public void IOTExam(View view) {
-        Intent intent = new Intent(this, IOTExamList.class);
+        startExamListActivity("iot");
+    }
+
+    private void startExamListActivity(String subject) {
+        Intent intent = new Intent(this, ExamListActivity.class);
+        intent.putExtra("subject", subject);
         startActivity(intent);
     }
 }

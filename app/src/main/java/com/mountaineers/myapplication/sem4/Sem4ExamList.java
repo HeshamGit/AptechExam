@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mountaineers.myapplication.ExamListActivity;
 import com.mountaineers.myapplication.R;
-import com.mountaineers.myapplication.sem2.JavaExamList;
 
 public class Sem4ExamList extends AppCompatActivity {
 
@@ -18,57 +18,52 @@ public class Sem4ExamList extends AppCompatActivity {
     }
 
     public void phpExam(View view) {
-        Intent intent = new Intent(this, PHPExamList.class);
-        startActivity(intent);
+        startExamListActivity("php");
     }
 
     public void apacheExam(View view) {
-        Intent intent = new Intent(this, ApacheExamList.class);
-        startActivity(intent);
+        startExamListActivity("apache");
     }
 
     public void mysqlExam(View view) {
-        Intent intent = new Intent(this, MySQLExamList.class);
-        startActivity(intent);
+        startExamListActivity("mysql");
     }
 
     public void ajaxJavaExam(View view) {
-        Intent intent = new Intent(this, AjaxJavaExamList.class);
-        startActivity(intent);
+        startExamListActivity("ajax_Java");
     }
 
     public void androidAppExam(View view) {
-        Intent intent = new Intent(this, AndroidAppExamList.class);
-        startActivity(intent);
+        startExamListActivity("android_app");
     }
 
     public void testAndroidExam(View view) {
-        Intent intent = new Intent(this, TestAndroidAppExamList.class);
-        startActivity(intent);
+        startExamListActivity("testing_android");
     }
 
     public void javaWebServicesExam(View view) {
-        Intent intent = new Intent(this, JavaWebServicesExamList.class);
-        startActivity(intent);
+        startExamListActivity("java_web_services");
     }
 
     public void cloudPlatformServiceExam(View view) {
-        Intent intent = new Intent(this, CloudPlatformServiceExamList.class);
-        startActivity(intent);
+        startExamListActivity("cloud_platform");
     }
 
     public void EJBExam(View view) {
-        Intent intent = new Intent(this, EJBExamList.class);
-        startActivity(intent);
+        startExamListActivity("ejb");
     }
 
     public void softwareEngineeringExam(View view) {
-        Intent intent = new Intent(this, SoftwareEngineeringExamList.class);
-        startActivity(intent);
+        startExamListActivity("soft_eng");
     }
 
     public void softwareProjectExam(View view) {
-        Intent intent = new Intent(this, SoftwareProjectExamList.class);
+        startExamListActivity("ms_project");
+    }
+
+    private void startExamListActivity(String subject) {
+        Intent intent = new Intent(this, ExamListActivity.class);
+        intent.putExtra("subject", subject);
         startActivity(intent);
     }
 }

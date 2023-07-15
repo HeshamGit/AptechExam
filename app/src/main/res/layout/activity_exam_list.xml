@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ExamListActivity">
+
+    <TextView
+        android:id="@+id/examTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/default_exam_title"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/listViewExams"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:clipToPadding="false" />
+
+</LinearLayout>
