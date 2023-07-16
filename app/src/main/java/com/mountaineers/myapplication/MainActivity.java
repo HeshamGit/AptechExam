@@ -7,9 +7,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mountaineers.myapplication.sem2.Sem2ExamList;
-import com.mountaineers.myapplication.sem4.Sem4ExamList;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -19,13 +16,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //to open sem1 activity
-    public void goToSem1(View view) {
-        Toast.makeText(this, "We don't add this part yet ):", Toast.LENGTH_SHORT).show();
-    }
+    public void goToSem1(View view) {startExamListActivity("sem1");}
 
     //to open sem1 activity
     public void goToSem2(View view) {
-        Intent intent = new Intent(this, Sem2ExamList.class);
+        startExamListActivity("sem2");
+    }
+
+    //to open sem3 activity
+    public void goToSem3(View view) {
+        startExamListActivity("sem3");
+    }
+
+    //to open sem4 activity
+    public void goToSem4(View view) {
+        startExamListActivity("sem4");
+    }
+
+    private void startExamListActivity(String semester) {
+        Intent intent = new Intent(this, SemExamList.class);
+        intent.putExtra("semester", semester);
         startActivity(intent);
     }
 
@@ -33,16 +43,5 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Toast.makeText(this, "Made By Hesham Noaman & Abdu Al-Jalil Al-Sharpi", Toast.LENGTH_LONG).show();
-    }
-
-    //to open sem3 activity
-    public void goToSem3(View view) {
-        Toast.makeText(this, "We don't add this part yet ):", Toast.LENGTH_SHORT).show();
-    }
-
-    //to open sem4 activity
-    public void goToSem4(View view) {
-        Intent intent = new Intent(this, Sem4ExamList.class);
-        startActivity(intent);
     }
 }

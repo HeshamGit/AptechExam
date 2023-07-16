@@ -8,15 +8,19 @@
     <string name="semester_four">Semester Four Exams</string>
 
     <!-- for each semester list-->
+    <string name="semester_one_exams">Aptech Sem1 Exams</string>
     <string name="semester_two_exams">Aptech Sem2 Exams</string>
+    <string name="semester_three_exams">Aptech Sem3 Exams</string>
     <string name="semester_four_exams">Aptech Sem4 Exams</string>
 
     <!-- for semester two list-->
     <string name="java">Java</string>
     <string name="c_sharp">C#</string>
-    <string name="liunx_read_hat">Red Hat Linux</string>
+    <string name="linux_read_hat">Red Hat Linux</string>
     <string name="seo">SEO</string>
     <string name="iot">IOT</string>
+    <string name="oop_in_java">Object-oriented Programming with Java</string>
+    <string name="online_ad">Online Advertising and Management</string>
 
     <!-- for semester two list in each exam -->
     <string name="java_exam">Aptech Java Exam Sample List</string>
@@ -52,24 +56,12 @@
     <string name="software_project_exam">Aptech Software Project Management Exam Sample List</string>
 
     <!-- sample exam list -->
-    <string name="sample_1">sample 1</string>
-    <string name="sample_2">sample 2</string>
-    <string name="sample_3">sample 3</string>
-    <string name="sample_4">sample 4</string>
-    <string name="sample_5">sample 5</string>
-    <string name="sample_6">sample 6</string>
-    <string name="sample_7">sample 7</string>
-    <string name="sample_8">sample 8</string>
-    <string name="sample_9">sample 9</string>
-    <string name="sample_10">sample 10</string>
-    <string name="sample_11">sample 11</string>
-    <string name="sample_12">sample 12</string>
-    <string name="sample_13">sample 13</string>
 
     <!-- toggle btn them text-->
     <string name="dark_mode">DarkMode</string>
     <string name="light_mode">LightMode</string>
     <string name="default_exam_title">Aptech Exam Sample List</string>
+    <string name="default_semester_title">Aptech Semester Exams</string>
 
 
 </resources>

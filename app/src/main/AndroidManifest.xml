@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SemExamList"
+            android:exported="false" />
+        <activity
             android:name=".ExamListActivity"
             android:exported="false" />
         <activity
@@ -27,8 +30,6 @@
             android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
-        <activity android:name=".sem2.Sem2ExamList" />
-        <activity android:name=".sem4.Sem4ExamList" />
     </application>
 
 </manifest>

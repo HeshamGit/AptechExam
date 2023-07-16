@@ -13,10 +13,12 @@ public class ExamListAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<SampleExam> sampleExams;
+    private final LayoutInflater inflater;
 
     public ExamListAdapter(Context context, List<SampleExam> sampleExams) {
         this.context = context;
         this.sampleExams = sampleExams;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -36,41 +38,50 @@ public class ExamListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+
         if (convertView == null) {
-            // Inflate the list item layout if convertView is null
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_exam, parent, false);
+            // If convertView is null, inflate the layout and create a new ViewHolder
+            convertView = inflater.inflate(R.layout.list_item_exam, parent, false);
+
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            // If convertView is not null, reuse the existing ViewHolder
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         // Get the sample exam at the current position
         SampleExam sampleExam = sampleExams.get(position);
 
         // Set the sample name on the button
-        Button btnSample = convertView.findViewById(R.id.btnSample);
-        btnSample.setText(sampleExam.getSampleName());
+        viewHolder.btnSample.setText(sampleExam.getSampleName());
 
         // Set click listener for the button
-        btnSample.setOnClickListener(v -> {
-
-            // Handle the button click event for the sample exam
-            String subject = sampleExam.getSubject();
-            String sample = sampleExam.getSampleName();
-            Class<?> activityClass = sampleExam.getActivityClass();
-
-            // Invoke the method to handle the sample exam click event
-            handleSampleExamClick(subject, sample, activityClass);
-        });
+        viewHolder.btnSample.setOnClickListener(v -> handleSampleExamClick(sampleExam));
 
         return convertView;
     }
 
-    private void handleSampleExamClick(String subject, String sample, Class<?> activityClass) {
-        // Implement the logic to handle the sample exam click event
+    private void handleSampleExamClick(SampleExam sampleExam) {
 
-        // Convert the sample name to lowercase without spaces
-        String sampleName = sample.replaceAll("\\s", "").toLowerCase();
+        // get subject name
+        String subject = sampleExam.getSubject();
+        // get the sample name and Convert it to lowercase without spaces
+        String sample = sampleExam.getSampleName().replaceAll("\\s", "").toLowerCase();
+        // get the activity class
+        Class<?> activityClass = sampleExam.getActivityClass();
 
         // Launch the appropriate activity based on subject and sample
-        ActivityUtils.startExamActivity(context, activityClass, subject, sampleName);
+        ActivityUtils.startExamActivity(context, activityClass, subject, sample);
+    }
+
+    static class ViewHolder {
+        final Button btnSample;
+
+        ViewHolder(View view) {
+            btnSample = view.findViewById(R.id.btnSample);
+        }
     }
 }
 
