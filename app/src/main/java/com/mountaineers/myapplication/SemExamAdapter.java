@@ -1,7 +1,6 @@
 package com.mountaineers.myapplication;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class SemExamAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.btnSubject = convertView.findViewById(R.id.btnSample);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             // If convertView is not null, reuse the existing ViewHolder
             viewHolder = (ViewHolder) convertView.getTag();
         }
@@ -62,7 +61,7 @@ public class SemExamAdapter extends BaseAdapter {
         viewHolder.btnSubject.setOnClickListener(v -> {
 
             // Start the ExamListActivity for the selected subject
-            startExamListActivity(subject.getValue());
+            ActivityUtils.startListActivity(context, ExamListActivity.class, "subject", subject.getValue());
         });
 
         return convertView;
@@ -71,12 +70,5 @@ public class SemExamAdapter extends BaseAdapter {
     // ViewHolder pattern to improve ListView performance
     private static class ViewHolder {
         Button btnSubject;
-    }
-
-    // Start the ExamListActivity for the selected subject
-    private void startExamListActivity(String subjectValue) {
-        Intent intent = new Intent(context, ExamListActivity.class);
-        intent.putExtra("subject", subjectValue);
-        context.startActivity(intent);
     }
 }

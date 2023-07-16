@@ -14,4 +14,10 @@ public class ActivityUtils {
         context.startActivity(intent);
     }
 
+    public static void startListActivity(Context context, Class<?> activityClassString, String key, String value) {
+        Intent intent = new Intent(context, activityClassString);
+        intent.putExtra(key, value);
+        context.startActivity(intent);
+    }
+
 }
