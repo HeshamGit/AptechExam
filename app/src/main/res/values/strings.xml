@@ -8,26 +8,41 @@
     <string name="semester_four">Semester Four Exams</string>
 
     <!-- for each semester list-->
-    <string name="semester_one_exams">Aptech Sem1 Exams</string>
-    <string name="semester_two_exams">Aptech Sem2 Exams</string>
-    <string name="semester_three_exams">Aptech Sem3 Exams</string>
-    <string name="semester_four_exams">Aptech Sem4 Exams</string>
+    <string name="semester_one_exams">Aptech Semester 1 Exams</string>
+    <string name="semester_two_exams">Aptech Semester 2 Exams</string>
+    <string name="semester_three_exams">Aptech Semester 3 Exams</string>
+    <string name="semester_four_exams">Aptech Semester 4 Exams</string>
 
     <!-- for semester two list-->
-    <string name="java">Java</string>
-    <string name="c_sharp">C#</string>
+    <string name="java">Fundamentals of Java</string>
+    <string name="c_sharp">Building Applications in C#</string>
     <string name="linux_read_hat">Red Hat Linux</string>
-    <string name="seo">SEO</string>
-    <string name="iot">IOT</string>
+    <string name="seo">Search Engine Optimization</string>
+    <string name="iot">Fundamentals of IoT</string>
     <string name="oop_in_java">Object-oriented Programming with Java</string>
     <string name="online_ad">Online Advertising and Management</string>
 
     <!-- for semester two list in each exam -->
-    <string name="java_exam">Aptech Java Exam Sample List</string>
-    <string name="csharp_exam">Aptech CSharp Exam Sample List</string>
-    <string name="iot_exam">Aptech IOT Exam Sample List</string>
+    <string name="java_exam">Aptech Fundamentals of Java Exam Sample List</string>
+    <string name="csharp_exam">Aptech Building Applications in C# Exam Sample List</string>
+    <string name="iot_exam">Aptech Fundamentals of IoT Exam Sample List</string>
     <string name="read_hat_exam">Aptech Red Hat Exam Sample List</string>
-    <string name="seo_exam">Aptech SEO Exam Sample List</string>
+    <string name="seo_exam">Aptech Search Engine Optimization Exam Sample List</string>
+    <string name="oop_in_java_exam">Aptech Object-oriented Programming with Java Sample List</string>
+    <string name="online_ad_exam">Aptech Online Advertising and Management Sample List</string>
+
+    <!-- for semester three list-->
+    <string name="web_component">Web Component Development using Java</string>
+    <string name="fund_java_enterprise">Fundamentals of Java Enterprise Components</string>
+    <string name="dev_app_java">Developing Applications Using Java Web Frameworks</string>
+    <string name="agile">Agile SDLC</string>
+
+    <!-- for semester two list in each exam -->
+    <string name="web_component_exam">Aptech Web Component Development using Java Sample List</string>
+    <string name="fund_java_enterprise_exam">Aptech Fundamentals of Java Enterprise Components Sample List</string>
+    <string name="dev_app_java_exam">Aptech Developing Applications Using Java Web Frameworks Sample List</string>
+    <string name="agile_exam">Aptech Agile SDLC</string>
+
 
     <!-- for semester four list-->
     <string name="php">PHP</string>
@@ -62,6 +77,7 @@
     <string name="light_mode">LightMode</string>
     <string name="default_exam_title">Aptech Exam Sample List</string>
     <string name="default_semester_title">Aptech Semester Exams</string>
+    <string name="default_btn_title">sample</string>
 
 
 </resources>

@@ -2,12 +2,9 @@ package com.mountaineers.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,9 +72,11 @@ public class SemExamList extends AppCompatActivity {
         SemesterSubjects = new HashMap<>();
 //        SemesterSubjects.put("sem1", getSemOneSubjects());
         SemesterSubjects.put("sem2", getSemTwoSubjects());
-//        SemesterSubjects.put("sem3", getSemThreeSubjects());
+        SemesterSubjects.put("sem3", getSemThreeSubjects());
         SemesterSubjects.put("sem4", getSemFourSubjects());
     }
+
+
 
     // Get the list of subjects for semester 1
     private List<SubjectModel> getSemTwoSubjects() {
@@ -91,6 +90,17 @@ public class SemExamList extends AppCompatActivity {
         semTwoSubjects.add(new SubjectModel(getString(R.string.online_ad), "online_ad"));
 
         return semTwoSubjects;
+    }
+
+    // Get the list of subjects for semester 3
+    private List<SubjectModel> getSemThreeSubjects() {
+        List<SubjectModel> semThreeSubjects = new ArrayList<>();
+        semThreeSubjects.add(new SubjectModel(getString(R.string.agile), "agile"));
+        semThreeSubjects.add(new SubjectModel(getString(R.string.dev_app_java), "dev_app_java"));
+        semThreeSubjects.add(new SubjectModel(getString(R.string.fund_java_enterprise), "fund_java_enterprise"));
+        semThreeSubjects.add(new SubjectModel(getString(R.string.web_component), "web_component"));
+
+        return semThreeSubjects;
     }
 
     // Get the list of subjects for semester 4

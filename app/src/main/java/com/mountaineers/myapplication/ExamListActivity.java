@@ -49,11 +49,22 @@ public class ExamListActivity extends AppCompatActivity {
     private void initializeSubjectTitles() {
         // Initialize the subject titles
         subjectTitles = new HashMap<>();
+        // semester one
         subjectTitles.put("java", R.string.java_exam);
         subjectTitles.put("cSharp", R.string.csharp_exam);
         subjectTitles.put("iot", R.string.iot_exam);
         subjectTitles.put("red_hat", R.string.read_hat_exam);
         subjectTitles.put("seo", R.string.seo_exam);
+        subjectTitles.put("oop_in_java", R.string.oop_in_java_exam);
+        subjectTitles.put("online_ad", R.string.online_ad_exam);
+
+        // semester three
+        subjectTitles.put("agile", R.string.agile_exam);
+        subjectTitles.put("dev_app_java", R.string.dev_app_java_exam);
+        subjectTitles.put("fund_java_enterprise", R.string.fund_java_enterprise_exam);
+        subjectTitles.put("web_component", R.string.web_component_exam);
+
+        // semester four
         subjectTitles.put("ms_project", R.string.software_project_exam);
         subjectTitles.put("soft_eng", R.string.software_engineering_exam);
         subjectTitles.put("ejb", R.string.ejb_exam);
@@ -70,11 +81,23 @@ public class ExamListActivity extends AppCompatActivity {
     private void initializeSubjectSampleExams() {
         // Initialize the subject sample exams
         subjectSampleExams = new HashMap<>();
+        // semester one
         subjectSampleExams.put("java", getJavaSampleExams());
         subjectSampleExams.put("cSharp", getCsharpSampleExams());
         subjectSampleExams.put("iot", getIOTSampleExams());
         subjectSampleExams.put("red_hat", getRedHatSampleExams());
         subjectSampleExams.put("seo", getSEOSampleExams());
+        subjectSampleExams.put("oop_in_java", getOOPJavaSampleExams());
+        subjectSampleExams.put("online_ad", getOnlineAdSampleExams());
+
+        // semester three
+        subjectSampleExams.put("agile", getAgileSampleExams());
+        subjectSampleExams.put("dev_app_java", getDevAppJavaSampleExams());
+        subjectSampleExams.put("fund_java_enterprise", getFundJavaEnterpriseSampleExams());
+        subjectSampleExams.put("web_component", getWebComponentSampleExams());
+
+
+        // semester four
         subjectSampleExams.put("ms_project", getMSPProjectSampleExams());
         subjectSampleExams.put("soft_eng", getSoftwareEngineeringSampleExams());
         subjectSampleExams.put("ejb", getEJBSampleExams());
@@ -107,6 +130,7 @@ public class ExamListActivity extends AppCompatActivity {
         }
     }
 
+    // semester two exam
     // Generate sample exams for Java subject
     private List<SampleExam> getJavaSampleExams() {
         List<SampleExam> javaExams = new ArrayList<>();
@@ -143,6 +167,52 @@ public class ExamListActivity extends AppCompatActivity {
         iotExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
         iotExams.add(new SampleExam(ViewPagerActivity.class, "SeoPdf", "Sample 2"));
         return iotExams;
+    }
+
+    private List<SampleExam> getOnlineAdSampleExams() {
+        List<SampleExam> onlineAdExams = new ArrayList<>();
+        onlineAdExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        onlineAdExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
+        return onlineAdExams;
+    }
+
+    private List<SampleExam> getOOPJavaSampleExams() {
+        List<SampleExam> oopJavaExams = new ArrayList<>();
+
+        addSampleExams(oopJavaExams, 5);
+        oopJavaExams.add(new SampleExam(ViewPagerActivity.class, "oopJavaImg", "Sample 6"));
+        return oopJavaExams;
+    }
+
+    // semester three exam
+    private List<SampleExam> getWebComponentSampleExams() {
+        List<SampleExam> webComponentExams = new ArrayList<>();
+        webComponentExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        webComponentExams.add(new SampleExam(ViewPagerActivity.class, "WebComponentPdf", "Sample 2"));
+        return webComponentExams;
+    }
+
+    private List<SampleExam> getFundJavaEnterpriseSampleExams() {
+        List<SampleExam> fundJavaEnterpriseExams = new ArrayList<>();
+        fundJavaEnterpriseExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        fundJavaEnterpriseExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
+        fundJavaEnterpriseExams.add(new SampleExam(ViewPagerActivity.class, "FundJavaEnterprisePdf", "Sample 3"));
+        return fundJavaEnterpriseExams;
+    }
+
+    private List<SampleExam> getDevAppJavaSampleExams() {
+        List<SampleExam> devAppJavaExams = new ArrayList<>();
+        devAppJavaExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        devAppJavaExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
+        devAppJavaExams.add(new SampleExam(ViewPagerActivity.class, "DevAppJavaPdf", "Sample 3"));
+        return devAppJavaExams;
+    }
+
+    private List<SampleExam> getAgileSampleExams() {
+        List<SampleExam> agileExams = new ArrayList<>();
+        agileExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        agileExams.add(new SampleExam(ViewPagerActivity.class, "AgilePdf", "Sample 2"));
+        return agileExams;
     }
 
     // semester four exam

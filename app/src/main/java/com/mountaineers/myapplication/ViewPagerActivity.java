@@ -58,6 +58,35 @@ public class ViewPagerActivity extends AppCompatActivity {
             R.drawable.learn_java_by_eg25, R.drawable.learn_java_by_eg26, R.drawable.learn_java_by_eg27,
             R.drawable.learn_java_by_eg28
     };
+    // oop in java image
+    private final Integer[] oopJavaImg = {
+            R.drawable.oop_in_java1, R.drawable.oop_in_java2, R.drawable.oop_in_java3,
+            R.drawable.oop_in_java4, R.drawable.oop_in_java5, R.drawable.oop_in_java6,
+            R.drawable.oop_in_java7, R.drawable.oop_in_java8, R.drawable.oop_in_java9,
+            R.drawable.oop_in_java10, R.drawable.oop_in_java11, R.drawable.oop_in_java12,
+            R.drawable.oop_in_java13, R.drawable.oop_in_java14, R.drawable.oop_in_java15,
+            R.drawable.oop_in_java16, R.drawable.oop_in_java17, R.drawable.oop_in_java18,
+            R.drawable.oop_in_java19, R.drawable.oop_in_java20, R.drawable.oop_in_java21,
+            R.drawable.oop_in_java22
+    };
+
+    //semester three img
+    private final Integer[] WebComponentPdf = {R.drawable.web_component_development1, R.drawable.web_component_development2, R.drawable.web_component_development3,
+            R.drawable.web_component_development4, R.drawable.web_component_development5, R.drawable.web_component_development6
+    };
+
+    private final Integer[] FundJavaEnterprisePdf = {R.drawable.intro_to_web_interprise1, R.drawable.intro_to_web_interprise2, R.drawable.intro_to_web_interprise3,
+            R.drawable.intro_to_web_interprise4, R.drawable.intro_to_web_interprise5, R.drawable.intro_to_web_interprise6
+    };
+
+    private final Integer[] DevAppJavaPdf = {R.drawable.java_web_frameworks1, R.drawable.java_web_frameworks2, R.drawable.java_web_frameworks3,
+            R.drawable.java_web_frameworks4, R.drawable.java_web_frameworks5, R.drawable.java_web_frameworks6, R.drawable.java_web_frameworks7
+    };
+
+    private final Integer[] AgilePdf = {R.drawable.agile1, R.drawable.agile2, R.drawable.agile3,
+            R.drawable.agile4, R.drawable.agile5
+    };
+
 
     //semester four img
     //linux image and pdf
@@ -80,12 +109,22 @@ public class ViewPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_pager);
 
         // Populate the ImageMap
+        // semester one
         ImageMap.put("cSharpImg", cSharpImg);
         ImageMap.put("cSharpPdf", cSharpPdf);
         ImageMap.put("SeoPdf", SeoPdf);
         ImageMap.put("linuxImg", linuxImg);
         ImageMap.put("linuxPdf", linuxPdf);
         ImageMap.put("javaImg", javaImg);
+        ImageMap.put("oopJavaImg", oopJavaImg);
+
+        // semester three
+        ImageMap.put("AgilePdf", AgilePdf);
+        ImageMap.put("DevAppJavaPdf", DevAppJavaPdf);
+        ImageMap.put("FundJavaEnterprisePdf", FundJavaEnterprisePdf);
+        ImageMap.put("WebComponentPdf", WebComponentPdf);
+
+        // semester four
         ImageMap.put("apacheImg", apacheImg);
         ImageMap.put("androidAppImg", androidAppImg);
 
