@@ -50,6 +50,17 @@ public class ExamListActivity extends AppCompatActivity {
         // Initialize the subject titles
         subjectTitles = new HashMap<>();
         // semester one
+        subjectTitles.put("html5", R.string.html5_exam);
+        subjectTitles.put("elementary_c", R.string.elementary_c_exam);
+        subjectTitles.put("programming_principles", R.string.programming_principles_exam);
+        subjectTitles.put("xml", R.string.xml_exam);
+        subjectTitles.put("oop_concept", R.string.oop_concept_exam);
+        subjectTitles.put("sql_server", R.string.sql_server_exam);
+        subjectTitles.put("ui_ux", R.string.ui_ux_exam);
+        subjectTitles.put("google_apps", R.string.google_apps_exam);
+
+
+        // semester two
         subjectTitles.put("java", R.string.java_exam);
         subjectTitles.put("cSharp", R.string.csharp_exam);
         subjectTitles.put("iot", R.string.iot_exam);
@@ -82,6 +93,16 @@ public class ExamListActivity extends AppCompatActivity {
         // Initialize the subject sample exams
         subjectSampleExams = new HashMap<>();
         // semester one
+        subjectSampleExams.put("html5", getHTML5SampleExams());
+        subjectSampleExams.put("elementary_c", getElementaryCSampleExams());
+        subjectSampleExams.put("programming_principles", getProgrammingPrinciplesSampleExams());
+        subjectSampleExams.put("xml", getXMLSampleExams());
+        subjectSampleExams.put("oop_concept", getOOPConceptSampleExams());
+        subjectSampleExams.put("sql_server", getSQLServerSampleExams());
+        subjectSampleExams.put("ui_ux", getUIUXSampleExams());
+        subjectSampleExams.put("google_apps", getGoogleAppsSampleExams());
+
+        // semester two
         subjectSampleExams.put("java", getJavaSampleExams());
         subjectSampleExams.put("cSharp", getCsharpSampleExams());
         subjectSampleExams.put("iot", getIOTSampleExams());
@@ -128,6 +149,60 @@ public class ExamListActivity extends AppCompatActivity {
         for (int i = 1; i <= count; i++) {
             sampleExams.add(new SampleExam(ExamWeb.class, subject, "Sample" + " " + i));
         }
+    }
+
+    // semester one exam
+    private List<SampleExam> getHTML5SampleExams() {
+        List<SampleExam> HTML5Exams = new ArrayList<>();
+        addSampleExams(HTML5Exams, 14);
+        HTML5Exams.add(new SampleExam(ViewPagerActivity.class, "HTML5Img", "Sample 15"));
+        return HTML5Exams;
+    }
+
+    private List<SampleExam> getElementaryCSampleExams() {
+        List<SampleExam> elementaryCExams = new ArrayList<>();
+        addSampleExams(elementaryCExams, 8);
+        elementaryCExams.add(new SampleExam(ViewPagerActivity.class, "elementaryCImg", "Sample 9"));
+        return elementaryCExams;
+    }
+
+    private List<SampleExam> getProgrammingPrinciplesSampleExams() {
+        List<SampleExam> ProgrammingPrinciplesExams = new ArrayList<>();
+        addSampleExams(ProgrammingPrinciplesExams, 5);
+        return ProgrammingPrinciplesExams;
+    }
+
+    private List<SampleExam> getXMLSampleExams() {
+        List<SampleExam> XMLExams = new ArrayList<>();
+        addSampleExams(XMLExams, 6);
+        XMLExams.add(new SampleExam(ViewPagerActivity.class, "XMLImg", "Sample 7"));
+        return XMLExams;
+    }
+
+    private List<SampleExam> getOOPConceptSampleExams() {
+        List<SampleExam> OOPConceptExams = new ArrayList<>();
+        addSampleExams(OOPConceptExams, 3);
+        return OOPConceptExams;
+    }
+
+    private List<SampleExam> getSQLServerSampleExams() {
+        List<SampleExam> SQLServerExams = new ArrayList<>();
+        addSampleExams(SQLServerExams, 11);
+        SQLServerExams.add(new SampleExam(ViewPagerActivity.class, "SQLServerImg", "Sample 12"));
+        return SQLServerExams;
+    }
+
+    private List<SampleExam> getUIUXSampleExams() {
+        List<SampleExam> UIUXExams = new ArrayList<>();
+        addSampleExams(UIUXExams, 9);
+        return UIUXExams;
+    }
+
+    private List<SampleExam> getGoogleAppsSampleExams() {
+        List<SampleExam> googleAppsExams = new ArrayList<>();
+        addSampleExams(googleAppsExams, 3);
+//        googleAppsExams.add(new SampleExam(ViewPagerActivity.class, "googleAppsImg", "Sample 4"));
+        return googleAppsExams;
     }
 
     // semester two exam

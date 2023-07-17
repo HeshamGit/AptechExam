@@ -53,7 +53,7 @@ public class SemExamList extends AppCompatActivity {
 
     // Get the list of subjects for the given semester
     private List<SubjectModel> getSubjectsForSemester(String semester) {
-        List<SubjectModel> subjects = (List<SubjectModel>) SemesterSubjects.get(semester);
+        List<SubjectModel> subjects = SemesterSubjects.get(semester);
         return (subjects != null) ? subjects : new ArrayList<>();
     }
 
@@ -70,15 +70,29 @@ public class SemExamList extends AppCompatActivity {
     private void initializeSemesterSubjects() {
         // Initialize the semesters subjects
         SemesterSubjects = new HashMap<>();
-//        SemesterSubjects.put("sem1", getSemOneSubjects());
+        SemesterSubjects.put("sem1", getSemOneSubjects());
         SemesterSubjects.put("sem2", getSemTwoSubjects());
         SemesterSubjects.put("sem3", getSemThreeSubjects());
         SemesterSubjects.put("sem4", getSemFourSubjects());
     }
 
 
-
     // Get the list of subjects for semester 1
+    private List<SubjectModel> getSemOneSubjects() {
+        List<SubjectModel> semOneSubjects = new ArrayList<>();
+        semOneSubjects.add(new SubjectModel(getString(R.string.html5), "html5"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.elementary_c), "elementary_c"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.programming_principles), "programming_principles"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.xml), "xml"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.oop_concept), "oop_concept"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.sql_server), "sql_server"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.ui_ux), "ui_ux"));
+        semOneSubjects.add(new SubjectModel(getString(R.string.google_apps), "google_apps"));
+
+        return semOneSubjects;
+    }
+
+    // Get the list of subjects for semester 2
     private List<SubjectModel> getSemTwoSubjects() {
         List<SubjectModel> semTwoSubjects = new ArrayList<>();
         semTwoSubjects.add(new SubjectModel(getString(R.string.java), "java"));

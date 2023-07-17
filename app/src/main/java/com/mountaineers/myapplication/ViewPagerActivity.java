@@ -89,13 +89,26 @@ public class ViewPagerActivity extends AppCompatActivity {
 
 
     //semester four img
-    //linux image and pdf
     private final Integer[] apacheImg = {
             R.drawable.apache1, R.drawable.apache2
     };
     //android app dev image and pdf
     private final Integer[] androidAppImg = {
             R.drawable.android_app1, R.drawable.android_app2, R.drawable.android_app3
+    };
+
+    //semester three img
+    private final Integer[] HTML5Img = {
+            R.drawable.html1, R.drawable.html2
+    };
+    private final Integer[] elementaryCImg = {
+            R.drawable.elementary_c1, R.drawable.elementary_c2, R.drawable.elementary_c3
+    };
+    private final Integer[] XMLImg = {
+            R.drawable.xml1
+    };
+    private final Integer[] SQLServerImg = {
+            R.drawable.sql_server1, R.drawable.sql_server2, R.drawable.sql_server3
     };
 
     // Define the map to associate caller names with image arrays
@@ -110,6 +123,12 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         // Populate the ImageMap
         // semester one
+        ImageMap.put("elementaryCImg", elementaryCImg);
+        ImageMap.put("HTML5Img", HTML5Img);
+        ImageMap.put("SQLServerImg", SQLServerImg);
+        ImageMap.put("XMLImg", XMLImg);
+
+        // semester two
         ImageMap.put("cSharpImg", cSharpImg);
         ImageMap.put("cSharpPdf", cSharpPdf);
         ImageMap.put("SeoPdf", SeoPdf);

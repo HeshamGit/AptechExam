@@ -13,6 +13,28 @@
     <string name="semester_three_exams">Aptech Semester 3 Exams</string>
     <string name="semester_four_exams">Aptech Semester 4 Exams</string>
 
+    <!-- for semester one list-->
+    <string name="html5">HTML 5</string>
+    <string name="elementary_c">Elementary programming with C</string>
+    <string name="programming_principles">Programming Principles and Techniques</string>
+    <string name="xml">Modern Markup for Data Interchange</string>
+    <string name="oop_concept">OOP Concepts</string>
+    <string name="sql_server">SQL Server 2012</string>
+    <string name="ui_ux">UI and UX for Modern Apps</string>
+    <string name="google_apps">Google Apps</string>
+
+
+    <!-- for semester one list in each exam -->
+    <string name="html5_exam">Aptech HTML 5 Exam Sample List</string>
+    <string name="elementary_c_exam">Aptech Elementary programming with C Exam Sample List</string>
+    <string name="programming_principles_exam">Aptech Programming Principles and Techniques Exam Sample List</string>
+    <string name="xml_exam">Aptech Modern Markup for Data Interchange Exam Sample List</string>
+    <string name="oop_concept_exam">Aptech OOP Concepts Exam Sample List</string>
+    <string name="sql_server_exam">Aptech SQL Server 2012 Exam Sample List</string>
+    <string name="ui_ux_exam">Aptech UI and UX for Modern Apps Exam Sample List</string>
+    <string name="google_apps_exam">Aptech Google Apps Exam Sample List</string>
+
+
     <!-- for semester two list-->
     <string name="java">Fundamentals of Java</string>
     <string name="c_sharp">Building Applications in C#</string>
