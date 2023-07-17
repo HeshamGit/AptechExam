@@ -4,7 +4,8 @@ package com.mountaineers.myapplication;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.webkit.WebView;
+import android.view.LayoutInflater;
+//import android.webkit.WebView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -13,18 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
+import com.mountaineers.myapplication.databinding.ActivityExamWebBinding;
+
 public class ExamWeb extends AppCompatActivity {
-    private WebView exam;
+    private ActivityExamWebBinding binding;
     private String caller;
     private String sample;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam_web);
+        binding = ActivityExamWebBinding.inflate(LayoutInflater.from(this)); //binding activity_exam_web layout
+        setContentView(binding.getRoot());
 
-        //casting the web view
-        exam = findViewById(R.id.ExamView);
+        // disable access the internet since we do not need it here
+        binding.ExamView.getSettings().setBlockNetworkLoads(true);
 
         //getting the caller activity name
         caller = getIntent().getStringExtra("caller");
@@ -85,7 +89,7 @@ public class ExamWeb extends AppCompatActivity {
     @SuppressLint("RequiresFeature")
     private void setWebViewForceDarkMode(boolean enabled) {
         int forceDarkMode = enabled ? WebSettingsCompat.FORCE_DARK_ON : WebSettingsCompat.FORCE_DARK_OFF;
-        WebSettingsCompat.setForceDark(exam.getSettings(), forceDarkMode);
+        WebSettingsCompat.setForceDark(binding.ExamView.getSettings(), forceDarkMode);
     }
 
     // Load the content into the web view
@@ -93,11 +97,11 @@ public class ExamWeb extends AppCompatActivity {
         //check if there is a value in save instance
         if (savedInstanceState != null) {
             // Restore the web view state from saved instance state
-            exam.restoreState(savedInstanceState);
+            binding.ExamView.restoreState(savedInstanceState);
         } else {
             String url = "file:///android_asset/" + caller + "/" + sample + ".htm";
             // Load the web page into the web view
-            exam.loadUrl(url);
+            binding.ExamView.loadUrl(url);
         }
     }
 
@@ -106,12 +110,13 @@ public class ExamWeb extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        exam.saveState(outState);
+        binding.ExamView.saveState(outState);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        exam.destroy();  // Properly release WebView resources
+        // Properly release WebView resources
+        binding.ExamView.destroy();
     }
 }
