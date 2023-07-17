@@ -1,6 +1,7 @@
 package com.mountaineers.myapplication;
 
 
+import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -14,6 +15,8 @@ import androidx.webkit.WebViewFeature;
 
 public class ExamWeb extends AppCompatActivity {
     private WebView exam;
+    private String caller;
+    private String sample;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +27,18 @@ public class ExamWeb extends AppCompatActivity {
         exam = findViewById(R.id.ExamView);
 
         //getting the caller activity name
-        String caller = getIntent().getStringExtra("caller");
+        caller = getIntent().getStringExtra("caller");
 
-        //to make the title of the web view
-        String title = caller + " " + getIntent().getStringExtra(caller);
+        // getting the sample name
+        sample = getIntent().getStringExtra(caller);
 
+        setupActionBar();
+        setupDarkModeToggle();
+        loadWebViewContent(savedInstanceState);
+    }
+
+    // Set up the action bar and title
+    private void setupActionBar() {
         //to get the actionBar
         ActionBar actionBar = getSupportActionBar();
 
@@ -36,14 +46,18 @@ public class ExamWeb extends AppCompatActivity {
         if (actionBar != null) {
             //to make the title of the web view
             actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(title);
+            actionBar.setTitle(caller + " " + sample);
         }
+    }
 
+    // Set up the dark mode toggle button and handle its events
+    private void setupDarkModeToggle() {
         //to get the mode of the device
         int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
-        //check if the device support the feature
+        // Check if the device supports force dark mode feature
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+            ActionBar actionBar = getSupportActionBar();
 
             //add the toggle layout to the actionBar
             if (actionBar != null) {
@@ -55,36 +69,49 @@ public class ExamWeb extends AppCompatActivity {
             //casting the toggleButton
             ToggleButton toggleButton = findViewById(R.id.toggle_btn);
 
-            //make on click listener to toggle the web view between the dark and light Mode
-            toggleButton.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            // Toggle the web view between dark and light mode based on the toggle state
+            toggleButton.setOnCheckedChangeListener((buttonView, isChecked) ->
+                    setWebViewForceDarkMode(isChecked));
 
-                int forceDarkMode = isChecked ? WebSettingsCompat.FORCE_DARK_ON : WebSettingsCompat.FORCE_DARK_OFF;
-                WebSettingsCompat.setForceDark(exam.getSettings(), forceDarkMode);
-            });
-
-            //to check if the dark mode is enabled
+            // Check if the system is in dark mode and set the toggle and web view accordingly
             if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-                //to make the web view dark
-                WebSettingsCompat.setForceDark(exam.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
                 toggleButton.setChecked(true);
+                setWebViewForceDarkMode(true);
             }
         }
+    }
 
+    // Set the force dark mode for the web view
+    @SuppressLint("RequiresFeature")
+    private void setWebViewForceDarkMode(boolean enabled) {
+        int forceDarkMode = enabled ? WebSettingsCompat.FORCE_DARK_ON : WebSettingsCompat.FORCE_DARK_OFF;
+        WebSettingsCompat.setForceDark(exam.getSettings(), forceDarkMode);
+    }
+
+    // Load the content into the web view
+    private void loadWebViewContent(Bundle savedInstanceState) {
         //check if there is a value in save instance
         if (savedInstanceState != null) {
-            //to restore the value that was saved  in the save instance
+            // Restore the web view state from saved instance state
             exam.restoreState(savedInstanceState);
         } else {
-            //open the web view depend on the chosen activity and sample
-            String sample = getIntent().getStringExtra(caller);
-            exam.loadUrl("file:///android_asset/" + caller + "/" + sample + ".htm");
+            String url = "file:///android_asset/" + caller + "/" + sample + ".htm";
+            // Load the web page into the web view
+            exam.loadUrl(url);
         }
     }
+
 
     //save the state of web view
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         exam.saveState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        exam.destroy();  // Properly release WebView resources
     }
 }
