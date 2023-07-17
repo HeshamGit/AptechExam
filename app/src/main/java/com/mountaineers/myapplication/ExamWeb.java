@@ -13,52 +13,53 @@ import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
 public class ExamWeb extends AppCompatActivity {
-    WebView exam;
-    ToggleButton toggleButton;
+    private WebView exam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_web);
 
-        //casting the web view and toggleButton
+        //casting the web view
         exam = findViewById(R.id.ExamView);
 
         //getting the caller activity name
-        String caller = getIntent().getExtras().getString("caller");
+        String caller = getIntent().getStringExtra("caller");
 
         //to make the title of the web view
-        String title = caller + " " + getIntent().getExtras().getString(caller);
+        String title = caller + " " + getIntent().getStringExtra(caller);
 
         //to get the actionBar
         ActionBar actionBar = getSupportActionBar();
+
         //check if the actionBar have a value
-        assert actionBar != null;
-        //to make the title of the web view
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(title);
+        if (actionBar != null) {
+            //to make the title of the web view
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setTitle(title);
+        }
 
         //to get the mode of the device
-        int nightModeFlags = getApplicationContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
         //check if the device support the feature
         if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
+
             //add the toggle layout to the actionBar
-            actionBar.setCustomView(R.layout.toggle_layout);
-            //add the title to the actionBar
-            actionBar.setDisplayShowCustomEnabled(true);
+            if (actionBar != null) {
+                actionBar.setCustomView(R.layout.toggle_layout);
+                //add the title to the actionBar
+                actionBar.setDisplayShowCustomEnabled(true);
+            }
 
             //casting the toggleButton
-            toggleButton = findViewById(R.id.toggle_btn);
+            ToggleButton toggleButton = findViewById(R.id.toggle_btn);
+
             //make on click listener to toggle the web view between the dark and light Mode
-            toggleButton.setOnCheckedChangeListener((compoundButton, b) -> {
-                if (b) {
-                    WebSettingsCompat.setForceDark(exam.getSettings(),
-                            WebSettingsCompat.FORCE_DARK_ON);
-                } else {
-                    WebSettingsCompat.setForceDark(exam.getSettings(),
-                            WebSettingsCompat.FORCE_DARK_OFF);
-                }
+            toggleButton.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+
+                int forceDarkMode = isChecked ? WebSettingsCompat.FORCE_DARK_ON : WebSettingsCompat.FORCE_DARK_OFF;
+                WebSettingsCompat.setForceDark(exam.getSettings(), forceDarkMode);
             });
 
             //to check if the dark mode is enabled
@@ -67,7 +68,6 @@ public class ExamWeb extends AppCompatActivity {
                 WebSettingsCompat.setForceDark(exam.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
                 toggleButton.setChecked(true);
             }
-
         }
 
         //check if there is a value in save instance
@@ -76,7 +76,7 @@ public class ExamWeb extends AppCompatActivity {
             exam.restoreState(savedInstanceState);
         } else {
             //open the web view depend on the chosen activity and sample
-            String sample = getIntent().getExtras().getString(caller);
+            String sample = getIntent().getStringExtra(caller);
             exam.loadUrl("file:///android_asset/" + caller + "/" + sample + ".htm");
         }
     }
