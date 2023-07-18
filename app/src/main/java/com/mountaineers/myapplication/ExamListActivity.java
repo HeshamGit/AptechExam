@@ -155,14 +155,14 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getHTML5SampleExams() {
         List<SampleExam> HTML5Exams = new ArrayList<>();
         addSampleExams(HTML5Exams, 14);
-        HTML5Exams.add(new SampleExam(ViewPagerActivity.class, "HTML5Img", "Sample 15"));
+        HTML5Exams.add(new SampleExam(GalleryActivity.class, "HTML5Img", "Sample 15"));
         return HTML5Exams;
     }
 
     private List<SampleExam> getElementaryCSampleExams() {
         List<SampleExam> elementaryCExams = new ArrayList<>();
         addSampleExams(elementaryCExams, 8);
-        elementaryCExams.add(new SampleExam(ViewPagerActivity.class, "elementaryCImg", "Sample 9"));
+        elementaryCExams.add(new SampleExam(GalleryActivity.class, "elementaryCImg", "Sample 9"));
         return elementaryCExams;
     }
 
@@ -175,7 +175,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getXMLSampleExams() {
         List<SampleExam> XMLExams = new ArrayList<>();
         addSampleExams(XMLExams, 6);
-        XMLExams.add(new SampleExam(ViewPagerActivity.class, "XMLImg", "Sample 7"));
+        XMLExams.add(new SampleExam(GalleryActivity.class, "XMLImg", "Sample 7"));
         return XMLExams;
     }
 
@@ -188,7 +188,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getSQLServerSampleExams() {
         List<SampleExam> SQLServerExams = new ArrayList<>();
         addSampleExams(SQLServerExams, 11);
-        SQLServerExams.add(new SampleExam(ViewPagerActivity.class, "SQLServerImg", "Sample 12"));
+        SQLServerExams.add(new SampleExam(GalleryActivity.class, "SQLServerImg", "Sample 12"));
         return SQLServerExams;
     }
 
@@ -201,7 +201,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getGoogleAppsSampleExams() {
         List<SampleExam> googleAppsExams = new ArrayList<>();
         addSampleExams(googleAppsExams, 3);
-//        googleAppsExams.add(new SampleExam(ViewPagerActivity.class, "googleAppsImg", "Sample 4"));
+//        googleAppsExams.add(new SampleExam(GalleryActivity.class, "googleAppsImg", "Sample 4"));
         return googleAppsExams;
     }
 
@@ -210,7 +210,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getJavaSampleExams() {
         List<SampleExam> javaExams = new ArrayList<>();
         addSampleExams(javaExams, 5);
-        javaExams.add(new SampleExam(ViewPagerActivity.class, "javaImg", "Sample 6"));
+        javaExams.add(new SampleExam(GalleryActivity.class, "javaImg", "Sample 6"));
         return javaExams;
     }
 
@@ -218,16 +218,16 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getCsharpSampleExams() {
         List<SampleExam> CsharpExams = new ArrayList<>();
         addSampleExams(CsharpExams, 5);
-        CsharpExams.add(new SampleExam(ViewPagerActivity.class, "cSharpImg", "Sample 6"));
-        CsharpExams.add(new SampleExam(ViewPagerActivity.class, "cSharpPdf", "Sample 7"));
+        CsharpExams.add(new SampleExam(GalleryActivity.class, "cSharpImg", "Sample 6"));
+        CsharpExams.add(new SampleExam(GalleryActivity.class, "cSharpPdf", "Sample 7"));
         return CsharpExams;
     }
 
     private List<SampleExam> getRedHatSampleExams() {
         List<SampleExam> redHatExams = new ArrayList<>();
         addSampleExams(redHatExams, 11);
-        redHatExams.add(new SampleExam(ViewPagerActivity.class, "linuxImg", "Sample 12"));
-        redHatExams.add(new SampleExam(ViewPagerActivity.class, "linuxPdf", "Sample 13"));
+        redHatExams.add(new SampleExam(GalleryActivity.class, "linuxImg", "Sample 12"));
+        redHatExams.add(new SampleExam(GalleryActivity.class, "linuxPdf", "Sample 13"));
         return redHatExams;
     }
 
@@ -240,7 +240,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getSEOSampleExams() {
         List<SampleExam> iotExams = new ArrayList<>();
         iotExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
-        iotExams.add(new SampleExam(ViewPagerActivity.class, "SeoPdf", "Sample 2"));
+        iotExams.add(new SampleExam(GalleryActivity.class, "SeoPdf", "Sample 2"));
         return iotExams;
     }
 
@@ -255,7 +255,7 @@ public class ExamListActivity extends AppCompatActivity {
         List<SampleExam> oopJavaExams = new ArrayList<>();
 
         addSampleExams(oopJavaExams, 5);
-        oopJavaExams.add(new SampleExam(ViewPagerActivity.class, "oopJavaImg", "Sample 6"));
+        oopJavaExams.add(new SampleExam(GalleryActivity.class, "oopJavaImg", "Sample 6"));
         return oopJavaExams;
     }
 
@@ -263,7 +263,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getWebComponentSampleExams() {
         List<SampleExam> webComponentExams = new ArrayList<>();
         webComponentExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
-        webComponentExams.add(new SampleExam(ViewPagerActivity.class, "WebComponentPdf", "Sample 2"));
+        webComponentExams.add(new SampleExam(GalleryActivity.class, "WebComponentPdf", "Sample 2"));
         return webComponentExams;
     }
 
@@ -271,7 +271,7 @@ public class ExamListActivity extends AppCompatActivity {
         List<SampleExam> fundJavaEnterpriseExams = new ArrayList<>();
         fundJavaEnterpriseExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
         fundJavaEnterpriseExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
-        fundJavaEnterpriseExams.add(new SampleExam(ViewPagerActivity.class, "FundJavaEnterprisePdf", "Sample 3"));
+        fundJavaEnterpriseExams.add(new SampleExam(GalleryActivity.class, "FundJavaEnterprisePdf", "Sample 3"));
         return fundJavaEnterpriseExams;
     }
 
@@ -279,14 +279,14 @@ public class ExamListActivity extends AppCompatActivity {
         List<SampleExam> devAppJavaExams = new ArrayList<>();
         devAppJavaExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
         devAppJavaExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
-        devAppJavaExams.add(new SampleExam(ViewPagerActivity.class, "DevAppJavaPdf", "Sample 3"));
+        devAppJavaExams.add(new SampleExam(GalleryActivity.class, "DevAppJavaPdf", "Sample 3"));
         return devAppJavaExams;
     }
 
     private List<SampleExam> getAgileSampleExams() {
         List<SampleExam> agileExams = new ArrayList<>();
         agileExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
-        agileExams.add(new SampleExam(ViewPagerActivity.class, "AgilePdf", "Sample 2"));
+        agileExams.add(new SampleExam(GalleryActivity.class, "AgilePdf", "Sample 2"));
         return agileExams;
     }
 
@@ -330,7 +330,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getAndroidAppSampleExams() {
         List<SampleExam> androidAppExams = new ArrayList<>();
         addSampleExams(androidAppExams, 4);
-        androidAppExams.add(new SampleExam(ViewPagerActivity.class, "androidAppImg", "Sample 5"));
+        androidAppExams.add(new SampleExam(GalleryActivity.class, "androidAppImg", "Sample 5"));
         return androidAppExams;
     }
 
@@ -349,7 +349,7 @@ public class ExamListActivity extends AppCompatActivity {
     private List<SampleExam> getApacheSampleExams() {
         List<SampleExam> apacheExams = new ArrayList<>();
         addSampleExams(apacheExams, 12);
-        apacheExams.add(new SampleExam(ViewPagerActivity.class, "apacheImg", "Sample 13"));
+        apacheExams.add(new SampleExam(GalleryActivity.class, "apacheImg", "Sample 13"));
         return apacheExams;
     }
 

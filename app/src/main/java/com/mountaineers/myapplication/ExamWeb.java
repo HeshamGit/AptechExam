@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-//import android.webkit.WebView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;

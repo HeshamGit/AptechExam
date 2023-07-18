@@ -1,21 +1,26 @@
 package com.mountaineers.myapplication;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class ViewPagerActivity extends AppCompatActivity {
-    //declare all the var
-    private SamplePagerAdapter samplePagerAdapter;
+public class GalleryActivity extends AppCompatActivity {
+
+    private GalleryAdapter galleryAdapter;
+
     private TextView pageNum;
-    private int totalPage, currentPage = 1;
+
+    Integer[] imageArray;
 
     //All Images stored im integer array
     //csharp image and pdf
@@ -114,12 +119,10 @@ public class ViewPagerActivity extends AppCompatActivity {
     // Define the map to associate caller names with image arrays
     private final Map<String, Integer[]> ImageMap = new HashMap<>();
 
-
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_pager);
+        setContentView(R.layout.activity_gallery);
 
         // Populate the ImageMap
         // semester one
@@ -152,11 +155,11 @@ public class ViewPagerActivity extends AppCompatActivity {
         String caller = getIntent().getStringExtra("caller");
 
         // Find the image array based on the caller name in the map
-        Integer[] imageArray = ImageMap.get(caller);
+        imageArray = ImageMap.get(caller);
 
         // Create the adapter with the correct image array
         if (imageArray != null) {
-            samplePagerAdapter = new SamplePagerAdapter(imageArray);
+            galleryAdapter = new GalleryAdapter(this, imageArray);
         } else {
             // Handle the case when the caller name is not found in the map
             // You can set a default image array or show an error message
@@ -164,38 +167,41 @@ public class ViewPagerActivity extends AppCompatActivity {
         }
 
         //casting
-        ViewPager imageViewPager = findViewById(R.id.view_pager);
+        //declare all the var
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
         pageNum = findViewById(R.id.page_num);
 
-        if (samplePagerAdapter != null) {
+        if (galleryAdapter != null) {
             //set the view pager adapter
-            imageViewPager.setAdapter(samplePagerAdapter);
+            viewPager.setAdapter(galleryAdapter);
 
-            //get the totalPage
-            totalPage = samplePagerAdapter.getCount();
-
-            //to display the totalPage with current in screen
-            pageNum.setText((currentPage + "/" + totalPage));
+            // Set the initial page number
+            setCurrentPageNumber(0);
         }
 
-        //adding on change Listener to update the page number
-        imageViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
+        // Optional: Enable offscreen page limit to preload adjacent images (optional but recommended)
+        viewPager.setOffscreenPageLimit(1);
 
+        // Listen to page changes and update the current page number accordingly
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
-                //get the currentPage
-                currentPage = position + 1;
-                //change the text
-                pageNum.setText((currentPage + "/" + totalPage));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
+                setCurrentPageNumber(position);
             }
         });
+
     }
 
+    @SuppressLint("SetTextI18n")
+    private void setCurrentPageNumber(int position) {
+        //get the currentPage and totalPage
+        int currentPage = position + 1;
+        int totalPage = imageArray.length;
+        // or
+        // galleryAdapter.getItemCount();
+
+        // Update the TextViews with the current page and total pages
+        pageNum.setText((currentPage + "/" + totalPage));
+
+    }
 }

@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewPagerActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".GalleryActivity">
 
-    <com.mountaineers.myapplication.HackyViewPager
-        android:layout_height="match_parent"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:id="@+id/view_pager" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,9 +25,4 @@
         android:fontFamily="@font/roboto_regular"
         android:layout_gravity="center_horizontal"/>
 
-
 </RelativeLayout>
-
-
-
-
