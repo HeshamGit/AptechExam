@@ -1,4 +1,4 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.utilities;
 
 import android.content.Context;
 import android.content.Intent;

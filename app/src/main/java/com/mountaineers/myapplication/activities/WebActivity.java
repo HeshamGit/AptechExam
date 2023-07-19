@@ -1,4 +1,4 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.activities;
 
 
 import android.annotation.SuppressLint;
@@ -13,17 +13,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.webkit.WebSettingsCompat;
 import androidx.webkit.WebViewFeature;
 
-import com.mountaineers.myapplication.databinding.ActivityExamWebBinding;
+import com.mountaineers.myapplication.R;
+import com.mountaineers.myapplication.databinding.ActivityWebBinding;
 
-public class ExamWeb extends AppCompatActivity {
-    private ActivityExamWebBinding binding;
+
+public class WebActivity extends AppCompatActivity {
+    private ActivityWebBinding binding;
     private String caller;
     private String sample;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityExamWebBinding.inflate(LayoutInflater.from(this)); //binding activity_exam_web layout
+        binding = ActivityWebBinding.inflate(LayoutInflater.from(this)); //binding activity_exam_web layout
         setContentView(binding.getRoot());
 
         // disable access the internet since we do not need it here

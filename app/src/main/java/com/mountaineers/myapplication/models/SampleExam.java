@@ -1,4 +1,4 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.models;
 
 public class SampleExam {
     private final Class<?> activityClass;

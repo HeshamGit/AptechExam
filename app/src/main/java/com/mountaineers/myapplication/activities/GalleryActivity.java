@@ -1,4 +1,4 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -8,21 +8,35 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.mountaineers.myapplication.R;
+import com.mountaineers.myapplication.adapters.GalleryAdapter;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GalleryActivity extends AppCompatActivity {
 
     private GalleryAdapter galleryAdapter;
-
     private TextView pageNum;
-
     Integer[] imageArray;
 
-    //All Images stored im integer array
+    //All Images stored in an integer array
+
+    //semester one img
+    private final Integer[] HTML5Img = {
+            R.drawable.html1, R.drawable.html2
+    };
+    private final Integer[] elementaryCImg = {
+            R.drawable.elementary_c1, R.drawable.elementary_c2, R.drawable.elementary_c3
+    };
+    private final Integer[] XMLImg = {
+            R.drawable.xml1
+    };
+    private final Integer[] SQLServerImg = {
+            R.drawable.sql_server1, R.drawable.sql_server2, R.drawable.sql_server3
+    };
+
+    //semester two img
     //csharp image and pdf
     private final Integer[] cSharpImg = {R.drawable.csharp1, R.drawable.csharp2, R.drawable.csharp3,
             R.drawable.csharp4, R.drawable.csharp5, R.drawable.csharp6, R.drawable.csharp7,
@@ -102,19 +116,6 @@ public class GalleryActivity extends AppCompatActivity {
             R.drawable.android_app1, R.drawable.android_app2, R.drawable.android_app3
     };
 
-    //semester three img
-    private final Integer[] HTML5Img = {
-            R.drawable.html1, R.drawable.html2
-    };
-    private final Integer[] elementaryCImg = {
-            R.drawable.elementary_c1, R.drawable.elementary_c2, R.drawable.elementary_c3
-    };
-    private final Integer[] XMLImg = {
-            R.drawable.xml1
-    };
-    private final Integer[] SQLServerImg = {
-            R.drawable.sql_server1, R.drawable.sql_server2, R.drawable.sql_server3
-    };
 
     // Define the map to associate caller names with image arrays
     private final Map<String, Integer[]> ImageMap = new HashMap<>();
@@ -167,7 +168,6 @@ public class GalleryActivity extends AppCompatActivity {
         }
 
         //casting
-        //declare all the var
         ViewPager2 viewPager = findViewById(R.id.viewPager);
         pageNum = findViewById(R.id.page_num);
 

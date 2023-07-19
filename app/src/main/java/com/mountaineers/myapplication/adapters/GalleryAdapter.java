@@ -1,17 +1,19 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
-import java.util.List;
+import com.mountaineers.myapplication.R;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
     private final Integer[] images;
@@ -31,18 +33,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-//        int imageResId = images.get(position);
         int imageResId = images[position];
 
+        // Set up Glide options for loading images
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache the original image without compression
                 .override(Target.SIZE_ORIGINAL); // Load the original image size
 
-        Glide.with(holder.itemView)
-                .load(imageResId)
-                .apply(requestOptions)
-                .preload(); // Preload the image for smoother navigation
-
+        // Load the image into the PhotoView
         Glide.with(holder.itemView)
                 .load(imageResId)
                 .apply(requestOptions)

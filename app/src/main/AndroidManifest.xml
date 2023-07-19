@@ -11,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".GalleryActivity"
+            android:name=".activities.GalleryActivity"
             android:exported="false" />
         <activity
-            android:name=".SemExamList"
+            android:name=".activities.SemSubjectActivity"
             android:exported="false" />
         <activity
-            android:name=".ExamListActivity"
+            android:name=".activities.SampleExamActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ExamWeb"
+            android:name=".activities.WebActivity"
             android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />

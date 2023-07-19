@@ -1,10 +1,13 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.activities;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.mountaineers.myapplication.R;
+import com.mountaineers.myapplication.utilities.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,22 +19,22 @@ public class MainActivity extends AppCompatActivity {
 
     //to open sem1 activity
     public void goToSem1(View view) {
-        ActivityUtils.startListActivity(this, SemExamList.class, "semester", "sem1");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem1");
     }
 
     //to open sem1 activity
     public void goToSem2(View view) {
-        ActivityUtils.startListActivity(this, SemExamList.class, "semester", "sem2");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem2");
     }
 
     //to open sem3 activity
     public void goToSem3(View view) {
-        ActivityUtils.startListActivity(this, SemExamList.class, "semester", "sem3");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem3");
     }
 
     //to open sem4 activity
     public void goToSem4(View view) {
-        ActivityUtils.startListActivity(this, SemExamList.class, "semester", "sem4");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem4");
     }
 
     @Override

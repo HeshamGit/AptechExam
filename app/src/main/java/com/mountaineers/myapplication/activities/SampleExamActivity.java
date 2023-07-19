@@ -1,4 +1,4 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.activities;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +7,16 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mountaineers.myapplication.adapters.SampleExamAdapter;
+import com.mountaineers.myapplication.R;
+import com.mountaineers.myapplication.models.SampleExam;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExamListActivity extends AppCompatActivity {
+public class SampleExamActivity extends AppCompatActivity {
 
     private Map<String, Integer> subjectTitles;
     private Map<String, List<SampleExam>> subjectSampleExams;
@@ -22,7 +26,7 @@ public class ExamListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam_list);
+        setContentView(R.layout.activity_sample_exam);
 
         ListView listViewExams = findViewById(R.id.listViewExams);
 
@@ -41,7 +45,7 @@ public class ExamListActivity extends AppCompatActivity {
         List<SampleExam> sampleExams = getSampleExams(subject);
 
         // Create the adapter and set it to the ListView
-        ExamListAdapter adapter = new ExamListAdapter(this, sampleExams);
+        SampleExamAdapter adapter = new SampleExamAdapter(this, sampleExams);
 
         listViewExams.setAdapter(adapter);
     }
@@ -147,7 +151,7 @@ public class ExamListActivity extends AppCompatActivity {
     // Helper method to add sample exams to the list
     private void addSampleExams(List<SampleExam> sampleExams, int count) {
         for (int i = 1; i <= count; i++) {
-            sampleExams.add(new SampleExam(ExamWeb.class, subject, "Sample" + " " + i));
+            sampleExams.add(new SampleExam(WebActivity.class, subject, "Sample" + " " + i));
         }
     }
 
@@ -233,21 +237,21 @@ public class ExamListActivity extends AppCompatActivity {
 
     private List<SampleExam> getIOTSampleExams() {
         List<SampleExam> iotExams = new ArrayList<>();
-        iotExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        iotExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         return iotExams;
     }
 
     private List<SampleExam> getSEOSampleExams() {
         List<SampleExam> iotExams = new ArrayList<>();
-        iotExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        iotExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         iotExams.add(new SampleExam(GalleryActivity.class, "SeoPdf", "Sample 2"));
         return iotExams;
     }
 
     private List<SampleExam> getOnlineAdSampleExams() {
         List<SampleExam> onlineAdExams = new ArrayList<>();
-        onlineAdExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
-        onlineAdExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
+        onlineAdExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
+        onlineAdExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
         return onlineAdExams;
     }
 
@@ -262,30 +266,30 @@ public class ExamListActivity extends AppCompatActivity {
     // semester three exam
     private List<SampleExam> getWebComponentSampleExams() {
         List<SampleExam> webComponentExams = new ArrayList<>();
-        webComponentExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        webComponentExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         webComponentExams.add(new SampleExam(GalleryActivity.class, "WebComponentPdf", "Sample 2"));
         return webComponentExams;
     }
 
     private List<SampleExam> getFundJavaEnterpriseSampleExams() {
         List<SampleExam> fundJavaEnterpriseExams = new ArrayList<>();
-        fundJavaEnterpriseExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
-        fundJavaEnterpriseExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
+        fundJavaEnterpriseExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
+        fundJavaEnterpriseExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
         fundJavaEnterpriseExams.add(new SampleExam(GalleryActivity.class, "FundJavaEnterprisePdf", "Sample 3"));
         return fundJavaEnterpriseExams;
     }
 
     private List<SampleExam> getDevAppJavaSampleExams() {
         List<SampleExam> devAppJavaExams = new ArrayList<>();
-        devAppJavaExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
-        devAppJavaExams.add(new SampleExam(ExamWeb.class, subject, "Sample 2"));
+        devAppJavaExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
+        devAppJavaExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
         devAppJavaExams.add(new SampleExam(GalleryActivity.class, "DevAppJavaPdf", "Sample 3"));
         return devAppJavaExams;
     }
 
     private List<SampleExam> getAgileSampleExams() {
         List<SampleExam> agileExams = new ArrayList<>();
-        agileExams.add(new SampleExam(ExamWeb.class, subject, "Sample 1"));
+        agileExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         agileExams.add(new SampleExam(GalleryActivity.class, "AgilePdf", "Sample 2"));
         return agileExams;
     }
@@ -305,7 +309,7 @@ public class ExamListActivity extends AppCompatActivity {
 
     private List<SampleExam> getEJBSampleExams() {
         List<SampleExam> ejbExams = new ArrayList<>();
-        ejbExams.add(new SampleExam(ExamWeb.class, "ejb", "Sample 1"));
+        ejbExams.add(new SampleExam(WebActivity.class, "ejb", "Sample 1"));
         return ejbExams;
     }
 

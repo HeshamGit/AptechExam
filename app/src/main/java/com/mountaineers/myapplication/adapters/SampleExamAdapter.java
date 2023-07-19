@@ -1,4 +1,4 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,15 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import com.mountaineers.myapplication.R;
+import com.mountaineers.myapplication.models.SampleExam;
+import com.mountaineers.myapplication.utilities.ActivityUtils;
+
 import java.util.List;
 
-public class ExamListAdapter extends BaseAdapter {
+public class SampleExamAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<SampleExam> sampleExams;
     private final LayoutInflater inflater;
 
-    public ExamListAdapter(Context context, List<SampleExam> sampleExams) {
+    public SampleExamAdapter(Context context, List<SampleExam> sampleExams) {
         this.context = context;
         this.sampleExams = sampleExams;
         this.inflater = LayoutInflater.from(context);

@@ -1,10 +1,10 @@
-package com.mountaineers.myapplication;
+package com.mountaineers.myapplication.models;
 
-public class SubjectModel {
+public class SemSubject {
     private final String displayText;
     private final String value;
 
-    public SubjectModel(String displayText, String value) {
+    public SemSubject(String displayText, String value) {
         this.displayText = displayText;
         this.value = value;
     }
