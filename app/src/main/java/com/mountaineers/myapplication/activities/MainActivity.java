@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.utilities.ActivityUtils;
+import com.mountaineers.myapplication.utilities.SemesterConstants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,22 +20,22 @@ public class MainActivity extends AppCompatActivity {
 
     //to open sem1 activity
     public void goToSem1(View view) {
-        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem1");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_ONE);
     }
 
     //to open sem1 activity
     public void goToSem2(View view) {
-        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem2");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_TWO);
     }
 
     //to open sem3 activity
     public void goToSem3(View view) {
-        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem3");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_THREE);
     }
 
     //to open sem4 activity
     public void goToSem4(View view) {
-        ActivityUtils.startListActivity(this, SemSubjectActivity.class, "semester", "sem4");
+        ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_FOUR);
     }
 
     @Override

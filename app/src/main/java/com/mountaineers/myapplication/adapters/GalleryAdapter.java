@@ -1,6 +1,7 @@
 package com.mountaineers.myapplication.adapters;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,10 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.mountaineers.myapplication.R;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder> {
-    private final Integer[] images;
+    private final TypedArray images;
     private final LayoutInflater inflater;
 
-    public GalleryAdapter(Context context, Integer[] images) {
+    public GalleryAdapter(Context context, TypedArray images) {
         this.images = images;
         inflater = LayoutInflater.from(context);
     }
@@ -33,7 +34,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-        int imageResId = images[position];
+        int imageResId = images.getResourceId(position, 0);
 
         // Set up Glide options for loading images
         RequestOptions requestOptions = new RequestOptions()
@@ -49,7 +50,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.GalleryV
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return images.length();
     }
 
     static class GalleryViewHolder extends RecyclerView.ViewHolder {

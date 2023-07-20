@@ -8,10 +8,10 @@
     <string name="semester_four">Semester Four Exams</string>
 
     <!-- for each semester list-->
-    <string name="semester_one_exams">Aptech Semester 1 Exams</string>
-    <string name="semester_two_exams">Aptech Semester 2 Exams</string>
-    <string name="semester_three_exams">Aptech Semester 3 Exams</string>
-    <string name="semester_four_exams">Aptech Semester 4 Exams</string>
+    <string name="semester_one_exam">Aptech Semester 1 Exams</string>
+    <string name="semester_two_exam">Aptech Semester 2 Exams</string>
+    <string name="semester_three_exam">Aptech Semester 3 Exams</string>
+    <string name="semester_four_exam">Aptech Semester 4 Exams</string>
 
     <!-- for semester one list-->
     <string name="html5">HTML 5</string>
@@ -46,9 +46,9 @@
 
     <!-- for semester two list in each exam -->
     <string name="java_exam">Aptech Fundamentals of Java Exam Sample List</string>
-    <string name="csharp_exam">Aptech Building Applications in C# Exam Sample List</string>
+    <string name="cSharp_exam">Aptech Building Applications in C# Exam Sample List</string>
     <string name="iot_exam">Aptech Fundamentals of IoT Exam Sample List</string>
-    <string name="read_hat_exam">Aptech Red Hat Exam Sample List</string>
+    <string name="red_hat_exam">Aptech Red Hat Exam Sample List</string>
     <string name="seo_exam">Aptech Search Engine Optimization Exam Sample List</string>
     <string name="oop_in_java_exam">Aptech Object-oriented Programming with Java Sample List</string>
     <string name="online_ad_exam">Aptech Online Advertising and Management Sample List</string>
@@ -63,7 +63,7 @@
     <string name="web_component_exam">Aptech Web Component Development using Java Sample List</string>
     <string name="fund_java_enterprise_exam">Aptech Fundamentals of Java Enterprise Components Sample List</string>
     <string name="dev_app_java_exam">Aptech Developing Applications Using Java Web Frameworks Sample List</string>
-    <string name="agile_exam">Aptech Agile SDLC</string>
+    <string name="agile_exam">Aptech Agile SDLC Sample List</string>
 
 
     <!-- for semester four list-->
@@ -85,12 +85,12 @@
     <string name="android_app_exam">Aptech Android App Exam Sample List</string>
     <string name="mysql_exam">Aptech MySQL Exam Sample List</string>
     <string name="ajax_java_exam">Aptech AJAX using Java Exam Sample List</string>
-    <string name="test_android_app_exam">Aptech Testing Android App Exam Sample List</string>
+    <string name="testing_android_exam">Aptech Testing Android App Exam Sample List</string>
     <string name="java_web_services_exam">Aptech Java Web Services Exam Sample List</string>
-    <string name="cloud_platform_service_exam">Aptech Cloud Platform Services Exam Sample List</string>
+    <string name="cloud_platform_exam">Aptech Cloud Platform Services Exam Sample List</string>
     <string name="ejb_exam">Aptech Enterprise Application Development Exam Sample List</string>
-    <string name="software_engineering_exam">Aptech Software Engineering Principles Exam Sample List</string>
-    <string name="software_project_exam">Aptech Software Project Management Exam Sample List</string>
+    <string name="soft_eng_exam">Aptech Software Engineering Principles Exam Sample List</string>
+    <string name="ms_project_exam">Aptech Software Project Management Exam Sample List</string>
 
     <!-- sample exam list -->
 

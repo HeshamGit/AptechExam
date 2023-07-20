@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.mountaineers.myapplication.adapters.SampleExamAdapter;
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.models.SampleExam;
+import com.mountaineers.myapplication.utilities.ActivityUtils;
+import com.mountaineers.myapplication.utilities.SubjectConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,11 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SampleExamActivity extends AppCompatActivity {
-
-    private Map<String, Integer> subjectTitles;
-    private Map<String, List<SampleExam>> subjectSampleExams;
-
     private String subject;
+    private Map<String, List<SampleExam>> subjectSampleExams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +30,14 @@ public class SampleExamActivity extends AppCompatActivity {
         ListView listViewExams = findViewById(R.id.listViewExams);
 
         // Retrieve the subject name from the intent
-        subject = getIntent().getStringExtra("subject");
+        subject = getIntent().getStringExtra(SubjectConstants.SUBJECT);
 
-        // Initialize subject titles and sample exams mappings
-        initializeSubjectTitles();
+        // Initialize sample exams mappings
         initializeSubjectSampleExams();
 
         // Set the title based on the subject
         TextView examTitle = findViewById(R.id.examTitle);
-        examTitle.setText(getSubjectTitle(subject));
+        examTitle.setText(ActivityUtils.getTitle(this, subject));
 
         // Set the appropriate sample exams list based on the subject
         List<SampleExam> sampleExams = getSampleExams(subject);
@@ -50,96 +48,47 @@ public class SampleExamActivity extends AppCompatActivity {
         listViewExams.setAdapter(adapter);
     }
 
-    private void initializeSubjectTitles() {
-        // Initialize the subject titles
-        subjectTitles = new HashMap<>();
-        // semester one
-        subjectTitles.put("html5", R.string.html5_exam);
-        subjectTitles.put("elementary_c", R.string.elementary_c_exam);
-        subjectTitles.put("programming_principles", R.string.programming_principles_exam);
-        subjectTitles.put("xml", R.string.xml_exam);
-        subjectTitles.put("oop_concept", R.string.oop_concept_exam);
-        subjectTitles.put("sql_server", R.string.sql_server_exam);
-        subjectTitles.put("ui_ux", R.string.ui_ux_exam);
-        subjectTitles.put("google_apps", R.string.google_apps_exam);
-
-
-        // semester two
-        subjectTitles.put("java", R.string.java_exam);
-        subjectTitles.put("cSharp", R.string.csharp_exam);
-        subjectTitles.put("iot", R.string.iot_exam);
-        subjectTitles.put("red_hat", R.string.read_hat_exam);
-        subjectTitles.put("seo", R.string.seo_exam);
-        subjectTitles.put("oop_in_java", R.string.oop_in_java_exam);
-        subjectTitles.put("online_ad", R.string.online_ad_exam);
-
-        // semester three
-        subjectTitles.put("agile", R.string.agile_exam);
-        subjectTitles.put("dev_app_java", R.string.dev_app_java_exam);
-        subjectTitles.put("fund_java_enterprise", R.string.fund_java_enterprise_exam);
-        subjectTitles.put("web_component", R.string.web_component_exam);
-
-        // semester four
-        subjectTitles.put("ms_project", R.string.software_project_exam);
-        subjectTitles.put("soft_eng", R.string.software_engineering_exam);
-        subjectTitles.put("ejb", R.string.ejb_exam);
-        subjectTitles.put("cloud_platform", R.string.cloud_platform_service_exam);
-        subjectTitles.put("java_web_services", R.string.java_web_services_exam);
-        subjectTitles.put("testing_android", R.string.test_android_app_exam);
-        subjectTitles.put("android_app", R.string.android_app_exam);
-        subjectTitles.put("ajax_Java", R.string.ajax_java_exam);
-        subjectTitles.put("mysql", R.string.mysql_exam);
-        subjectTitles.put("apache", R.string.apache_exam);
-        subjectTitles.put("php", R.string.php_exam);
-    }
-
     private void initializeSubjectSampleExams() {
         // Initialize the subject sample exams
         subjectSampleExams = new HashMap<>();
         // semester one
-        subjectSampleExams.put("html5", getHTML5SampleExams());
-        subjectSampleExams.put("elementary_c", getElementaryCSampleExams());
-        subjectSampleExams.put("programming_principles", getProgrammingPrinciplesSampleExams());
-        subjectSampleExams.put("xml", getXMLSampleExams());
-        subjectSampleExams.put("oop_concept", getOOPConceptSampleExams());
-        subjectSampleExams.put("sql_server", getSQLServerSampleExams());
-        subjectSampleExams.put("ui_ux", getUIUXSampleExams());
-        subjectSampleExams.put("google_apps", getGoogleAppsSampleExams());
+        subjectSampleExams.put(SubjectConstants.HTML5, getHTML5SampleExams());
+        subjectSampleExams.put(SubjectConstants.ELEMENTARY_C, getElementaryCSampleExams());
+        subjectSampleExams.put(SubjectConstants.PROGRAMMING_PRINCIPLES, getProgrammingPrinciplesSampleExams());
+        subjectSampleExams.put(SubjectConstants.XML, getXMLSampleExams());
+        subjectSampleExams.put(SubjectConstants.OOP_CONCEPT, getOOPConceptSampleExams());
+        subjectSampleExams.put(SubjectConstants.SQL_SERVER, getSQLServerSampleExams());
+        subjectSampleExams.put(SubjectConstants.UI_UX, getUIUXSampleExams());
+        subjectSampleExams.put(SubjectConstants.GOOGLE_APPS, getGoogleAppsSampleExams());
 
         // semester two
-        subjectSampleExams.put("java", getJavaSampleExams());
-        subjectSampleExams.put("cSharp", getCsharpSampleExams());
-        subjectSampleExams.put("iot", getIOTSampleExams());
-        subjectSampleExams.put("red_hat", getRedHatSampleExams());
-        subjectSampleExams.put("seo", getSEOSampleExams());
-        subjectSampleExams.put("oop_in_java", getOOPJavaSampleExams());
-        subjectSampleExams.put("online_ad", getOnlineAdSampleExams());
+        subjectSampleExams.put(SubjectConstants.JAVA, getJavaSampleExams());
+        subjectSampleExams.put(SubjectConstants.CSHARP, getCsharpSampleExams());
+        subjectSampleExams.put(SubjectConstants.IOT, getIOTSampleExams());
+        subjectSampleExams.put(SubjectConstants.RED_HAT, getRedHatSampleExams());
+        subjectSampleExams.put(SubjectConstants.SEO, getSEOSampleExams());
+        subjectSampleExams.put(SubjectConstants.OOP_IN_JAVA, getOOPJavaSampleExams());
+        subjectSampleExams.put(SubjectConstants.ONLINE_AD, getOnlineAdSampleExams());
 
         // semester three
-        subjectSampleExams.put("agile", getAgileSampleExams());
-        subjectSampleExams.put("dev_app_java", getDevAppJavaSampleExams());
-        subjectSampleExams.put("fund_java_enterprise", getFundJavaEnterpriseSampleExams());
-        subjectSampleExams.put("web_component", getWebComponentSampleExams());
+        subjectSampleExams.put(SubjectConstants.AGILE, getAgileSampleExams());
+        subjectSampleExams.put(SubjectConstants.DEV_APP_JAVA, getDevAppJavaSampleExams());
+        subjectSampleExams.put(SubjectConstants.FUND_JAVA_ENTERPRISE, getFundJavaEnterpriseSampleExams());
+        subjectSampleExams.put(SubjectConstants.WEB_COMPONENT, getWebComponentSampleExams());
 
 
         // semester four
-        subjectSampleExams.put("ms_project", getMSPProjectSampleExams());
-        subjectSampleExams.put("soft_eng", getSoftwareEngineeringSampleExams());
-        subjectSampleExams.put("ejb", getEJBSampleExams());
-        subjectSampleExams.put("cloud_platform", getCloudPlatformSampleExams());
-        subjectSampleExams.put("java_web_services", getJavaWebServicesSampleExams());
-        subjectSampleExams.put("testing_android", getTestingAndroidSampleExams());
-        subjectSampleExams.put("android_app", getAndroidAppSampleExams());
-        subjectSampleExams.put("ajax_Java", getAjaxJavaSampleExams());
-        subjectSampleExams.put("mysql", getMySQLSampleExams());
-        subjectSampleExams.put("apache", getApacheSampleExams());
-        subjectSampleExams.put("php", getPHPSampleExams());
-    }
-
-    // to get title of the list view
-    private String getSubjectTitle(String subject) {
-        Integer titleResId = subjectTitles.get(subject);
-        return (titleResId != null) ? getString(titleResId) : "";
+        subjectSampleExams.put(SubjectConstants.MS_PROJECT, getMSPProjectSampleExams());
+        subjectSampleExams.put(SubjectConstants.SOFT_ENG, getSoftwareEngineeringSampleExams());
+        subjectSampleExams.put(SubjectConstants.EJB, getEJBSampleExams());
+        subjectSampleExams.put(SubjectConstants.CLOUD_PLATFORM, getCloudPlatformSampleExams());
+        subjectSampleExams.put(SubjectConstants.JAVA_WEB_SERVICES, getJavaWebServicesSampleExams());
+        subjectSampleExams.put(SubjectConstants.TESTING_ANDROID, getTestingAndroidSampleExams());
+        subjectSampleExams.put(SubjectConstants.ANDROID_APP, getAndroidAppSampleExams());
+        subjectSampleExams.put(SubjectConstants.AJAX_JAVA, getAjaxJavaSampleExams());
+        subjectSampleExams.put(SubjectConstants.MYSQL, getMySQLSampleExams());
+        subjectSampleExams.put(SubjectConstants.APACHE, getApacheSampleExams());
+        subjectSampleExams.put(SubjectConstants.PHP, getPHPSampleExams());
     }
 
     // to get sample exams list
@@ -159,14 +108,14 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getHTML5SampleExams() {
         List<SampleExam> HTML5Exams = new ArrayList<>();
         addSampleExams(HTML5Exams, 14);
-        HTML5Exams.add(new SampleExam(GalleryActivity.class, "HTML5Img", "Sample 15"));
+        HTML5Exams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.html5_images) , "Sample 15"));
         return HTML5Exams;
     }
 
     private List<SampleExam> getElementaryCSampleExams() {
         List<SampleExam> elementaryCExams = new ArrayList<>();
         addSampleExams(elementaryCExams, 8);
-        elementaryCExams.add(new SampleExam(GalleryActivity.class, "elementaryCImg", "Sample 9"));
+        elementaryCExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.elementary_c_images), "Sample 9"));
         return elementaryCExams;
     }
 
@@ -179,7 +128,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getXMLSampleExams() {
         List<SampleExam> XMLExams = new ArrayList<>();
         addSampleExams(XMLExams, 6);
-        XMLExams.add(new SampleExam(GalleryActivity.class, "XMLImg", "Sample 7"));
+        XMLExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.xml_images), "Sample 7"));
         return XMLExams;
     }
 
@@ -192,7 +141,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getSQLServerSampleExams() {
         List<SampleExam> SQLServerExams = new ArrayList<>();
         addSampleExams(SQLServerExams, 11);
-        SQLServerExams.add(new SampleExam(GalleryActivity.class, "SQLServerImg", "Sample 12"));
+        SQLServerExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.sql_server_images), "Sample 12"));
         return SQLServerExams;
     }
 
@@ -214,7 +163,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getJavaSampleExams() {
         List<SampleExam> javaExams = new ArrayList<>();
         addSampleExams(javaExams, 5);
-        javaExams.add(new SampleExam(GalleryActivity.class, "javaImg", "Sample 6"));
+        javaExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.java_images), "Sample 6"));
         return javaExams;
     }
 
@@ -222,16 +171,16 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getCsharpSampleExams() {
         List<SampleExam> CsharpExams = new ArrayList<>();
         addSampleExams(CsharpExams, 5);
-        CsharpExams.add(new SampleExam(GalleryActivity.class, "cSharpImg", "Sample 6"));
-        CsharpExams.add(new SampleExam(GalleryActivity.class, "cSharpPdf", "Sample 7"));
+        CsharpExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.csharp_images), "Sample 6"));
+        CsharpExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.csharp_pdf), "Sample 7"));
         return CsharpExams;
     }
 
     private List<SampleExam> getRedHatSampleExams() {
         List<SampleExam> redHatExams = new ArrayList<>();
         addSampleExams(redHatExams, 11);
-        redHatExams.add(new SampleExam(GalleryActivity.class, "linuxImg", "Sample 12"));
-        redHatExams.add(new SampleExam(GalleryActivity.class, "linuxPdf", "Sample 13"));
+        redHatExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.linux_images), "Sample 12"));
+        redHatExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.linux_pdf), "Sample 13"));
         return redHatExams;
     }
 
@@ -244,7 +193,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getSEOSampleExams() {
         List<SampleExam> iotExams = new ArrayList<>();
         iotExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        iotExams.add(new SampleExam(GalleryActivity.class, "SeoPdf", "Sample 2"));
+        iotExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.seo_pdf), "Sample 2"));
         return iotExams;
     }
 
@@ -259,7 +208,7 @@ public class SampleExamActivity extends AppCompatActivity {
         List<SampleExam> oopJavaExams = new ArrayList<>();
 
         addSampleExams(oopJavaExams, 5);
-        oopJavaExams.add(new SampleExam(GalleryActivity.class, "oopJavaImg", "Sample 6"));
+        oopJavaExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.oop_java_images), "Sample 6"));
         return oopJavaExams;
     }
 
@@ -267,7 +216,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getWebComponentSampleExams() {
         List<SampleExam> webComponentExams = new ArrayList<>();
         webComponentExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        webComponentExams.add(new SampleExam(GalleryActivity.class, "WebComponentPdf", "Sample 2"));
+        webComponentExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.web_component_pdf), "Sample 2"));
         return webComponentExams;
     }
 
@@ -275,7 +224,7 @@ public class SampleExamActivity extends AppCompatActivity {
         List<SampleExam> fundJavaEnterpriseExams = new ArrayList<>();
         fundJavaEnterpriseExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         fundJavaEnterpriseExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
-        fundJavaEnterpriseExams.add(new SampleExam(GalleryActivity.class, "FundJavaEnterprisePdf", "Sample 3"));
+        fundJavaEnterpriseExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.fund_java_enterprise_pdf), "Sample 3"));
         return fundJavaEnterpriseExams;
     }
 
@@ -283,14 +232,14 @@ public class SampleExamActivity extends AppCompatActivity {
         List<SampleExam> devAppJavaExams = new ArrayList<>();
         devAppJavaExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         devAppJavaExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
-        devAppJavaExams.add(new SampleExam(GalleryActivity.class, "DevAppJavaPdf", "Sample 3"));
+        devAppJavaExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.dev_app_java_pdf), "Sample 3"));
         return devAppJavaExams;
     }
 
     private List<SampleExam> getAgileSampleExams() {
         List<SampleExam> agileExams = new ArrayList<>();
         agileExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        agileExams.add(new SampleExam(GalleryActivity.class, "AgilePdf", "Sample 2"));
+        agileExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.agile_pdf), "Sample 2"));
         return agileExams;
     }
 
@@ -309,7 +258,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getEJBSampleExams() {
         List<SampleExam> ejbExams = new ArrayList<>();
-        ejbExams.add(new SampleExam(WebActivity.class, "ejb", "Sample 1"));
+        ejbExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
         return ejbExams;
     }
 
@@ -334,7 +283,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getAndroidAppSampleExams() {
         List<SampleExam> androidAppExams = new ArrayList<>();
         addSampleExams(androidAppExams, 4);
-        androidAppExams.add(new SampleExam(GalleryActivity.class, "androidAppImg", "Sample 5"));
+        androidAppExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.android_app_images), "Sample 5"));
         return androidAppExams;
     }
 
@@ -353,7 +302,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getApacheSampleExams() {
         List<SampleExam> apacheExams = new ArrayList<>();
         addSampleExams(apacheExams, 12);
-        apacheExams.add(new SampleExam(GalleryActivity.class, "apacheImg", "Sample 13"));
+        apacheExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.apache_images), "Sample 13"));
         return apacheExams;
     }
 
@@ -362,5 +311,4 @@ public class SampleExamActivity extends AppCompatActivity {
         addSampleExams(phpExams, 4);
         return phpExams;
     }
-
 }
