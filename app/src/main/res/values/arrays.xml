@@ -4,7 +4,6 @@
     <!-- Semester One -->
     <integer-array name="html5_images">
         <item>@drawable/html1</item>
-        <item>@drawable/html2</item>
     </integer-array>
 
     <integer-array name="elementary_c_images">
@@ -140,32 +139,6 @@
         <item>@drawable/learn_java_by_eg28</item>
     </integer-array>
 
-    <integer-array name="oop_java_images">
-        <item>@drawable/oop_in_java1</item>
-        <item>@drawable/oop_in_java2</item>
-        <item>@drawable/oop_in_java3</item>
-        <item>@drawable/oop_in_java4</item>
-        <item>@drawable/oop_in_java5</item>
-        <item>@drawable/oop_in_java6</item>
-        <item>@drawable/oop_in_java7</item>
-        <item>@drawable/oop_in_java8</item>
-        <item>@drawable/oop_in_java9</item>
-        <item>@drawable/oop_in_java10</item>
-
-        <item>@drawable/oop_in_java11</item>
-        <item>@drawable/oop_in_java12</item>
-        <item>@drawable/oop_in_java13</item>
-        <item>@drawable/oop_in_java14</item>
-        <item>@drawable/oop_in_java15</item>
-        <item>@drawable/oop_in_java16</item>
-        <item>@drawable/oop_in_java17</item>
-        <item>@drawable/oop_in_java18</item>
-        <item>@drawable/oop_in_java19</item>
-        <item>@drawable/oop_in_java20</item>
-
-        <item>@drawable/oop_in_java21</item>
-        <item>@drawable/oop_in_java22</item>
-    </integer-array>
 
     <!-- Semester Three -->
     <integer-array name="web_component_pdf">

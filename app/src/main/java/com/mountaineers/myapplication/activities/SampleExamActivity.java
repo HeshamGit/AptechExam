@@ -186,8 +186,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getOOPJavaSampleExams() {
         List<SampleExam> oopJavaExams = new ArrayList<>();
-        addSampleExams(oopJavaExams, 5);
-        oopJavaExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.oop_java_images), "Sample 6"));
+        addSampleExams(oopJavaExams, 6);
         return oopJavaExams;
     }
 
