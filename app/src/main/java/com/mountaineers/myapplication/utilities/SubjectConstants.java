@@ -37,7 +37,7 @@ public class SubjectConstants {
     public static final String JAVA_WEB_SERVICES = "java_web_services";
     public static final String TESTING_ANDROID = "testing_android";
     public static final String ANDROID_APP = "android_app";
-    public static final String AJAX_JAVA = "ajax_Java";
+    public static final String AJAX_JAVA = "ajax_java";
     public static final String MYSQL = "mysql";
     public static final String APACHE = "apache";
     public static final String PHP = "php";
