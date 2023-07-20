@@ -37,8 +37,8 @@
 
     <!-- for semester two list-->
     <string name="java">Fundamentals of Java</string>
-    <string name="c_sharp">Building Applications in C#</string>
-    <string name="linux_read_hat">Red Hat Linux</string>
+    <string name="cSharp">Building Applications in C#</string>
+    <string name="red_hat">Red Hat Linux</string>
     <string name="seo">Search Engine Optimization</string>
     <string name="iot">Fundamentals of IoT</string>
     <string name="oop_in_java">Object-oriented Programming with Java</string>
@@ -72,12 +72,12 @@
     <string name="mysql">MySQL</string>
     <string name="ajax_java">AJAX using Java</string>
     <string name="android_app">Android App Development</string>
-    <string name="test_android_app">Testing Android App</string>
+    <string name="testing_android">Testing Android App</string>
     <string name="java_web_services">Java Web Services</string>
-    <string name="cloud_platform_service">Cloud Platform Services</string>
-    <string name="EJB">Enterprise Application Development</string>
-    <string name="software_engineering">Software Engineering Principles</string>
-    <string name="software_project">Software Project Management</string>
+    <string name="cloud_platform">Cloud Platform Services</string>
+    <string name="ejb">Enterprise Application Development</string>
+    <string name="soft_eng">Software Engineering Principles</string>
+    <string name="ms_project">Software Project Management</string>
 
     <!-- for semester four list in each exam -->
     <string name="php_exam">Aptech PHP Exam Sample List</string>

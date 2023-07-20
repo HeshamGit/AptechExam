@@ -14,12 +14,9 @@ import com.mountaineers.myapplication.utilities.SemesterConstants;
 import com.mountaineers.myapplication.utilities.SubjectConstants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SemSubjectActivity extends AppCompatActivity {
-    private Map<String, List<SemSubject>> SemesterSubjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,34 +32,28 @@ public class SemSubjectActivity extends AppCompatActivity {
         TextView semesterTitle = findViewById(R.id.semesterTitle);
         semesterTitle.setText(ActivityUtils.getTitle(this, semester));
 
-        // Initialize subjects of semester
-        initializeSemesterSubjects();
-
-        // Set the appropriate subject list of semester based on the semester name
-        List<SemSubject> SubjectsForSemester = getSubjectsForSemester(semester);
-
-        // Create the adapter and set it to the ListView
-        SemSubjectAdapter adapter = new SemSubjectAdapter(this, SubjectsForSemester);
+        // Create the adapter and set it to the ListView and pass to it the subject of the semester
+        SemSubjectAdapter adapter = new SemSubjectAdapter(this, getSemesterSubjects(semester));
         listViewSemester.setAdapter(adapter);
 
     }
 
-    // Get the list of subjects for the given semester
-    private List<SemSubject> getSubjectsForSemester(String semester) {
-        List<SemSubject> subjects = SemesterSubjects.get(semester);
-        return (subjects != null) ? subjects : new ArrayList<>();
+    private List<SemSubject> getSemesterSubjects(String semester) {
+
+        // Initialize subjects for the specific semester using a switch statement
+        switch (semester) {
+            case SemesterConstants.SEMESTER_ONE:
+                return getSemOneSubjects();
+            case SemesterConstants.SEMESTER_TWO:
+                return getSemTwoSubjects();
+            case SemesterConstants.SEMESTER_THREE:
+                return getSemThreeSubjects();
+            case SemesterConstants.SEMESTER_FOUR:
+                return getSemFourSubjects();
+            default:
+                return new ArrayList<>();
+        }
     }
-
-
-    private void initializeSemesterSubjects() {
-        // Initialize the semesters subjects
-        SemesterSubjects = new HashMap<>();
-        SemesterSubjects.put(SemesterConstants.SEMESTER_ONE, getSemOneSubjects());
-        SemesterSubjects.put(SemesterConstants.SEMESTER_TWO, getSemTwoSubjects());
-        SemesterSubjects.put(SemesterConstants.SEMESTER_THREE, getSemThreeSubjects());
-        SemesterSubjects.put(SemesterConstants.SEMESTER_FOUR, getSemFourSubjects());
-    }
-
 
     // Get the list of subjects for semester 1
     private List<SemSubject> getSemOneSubjects() {
@@ -83,8 +74,8 @@ public class SemSubjectActivity extends AppCompatActivity {
     private List<SemSubject> getSemTwoSubjects() {
         List<SemSubject> semTwoSubjects = new ArrayList<>();
         semTwoSubjects.add(new SemSubject(getString(R.string.java), SubjectConstants.JAVA));
-        semTwoSubjects.add(new SemSubject(getString(R.string.c_sharp), SubjectConstants.CSHARP));
-        semTwoSubjects.add(new SemSubject(getString(R.string.linux_read_hat), SubjectConstants.RED_HAT));
+        semTwoSubjects.add(new SemSubject(getString(R.string.cSharp), SubjectConstants.CSHARP));
+        semTwoSubjects.add(new SemSubject(getString(R.string.red_hat), SubjectConstants.RED_HAT));
         semTwoSubjects.add(new SemSubject(getString(R.string.iot), SubjectConstants.IOT));
         semTwoSubjects.add(new SemSubject(getString(R.string.seo), SubjectConstants.SEO));
         semTwoSubjects.add(new SemSubject(getString(R.string.oop_in_java), SubjectConstants.OOP_IN_JAVA));
@@ -112,13 +103,12 @@ public class SemSubjectActivity extends AppCompatActivity {
         semFourSubjects.add(new SemSubject(getString(R.string.mysql), SubjectConstants.MYSQL));
         semFourSubjects.add(new SemSubject(getString(R.string.ajax_java), SubjectConstants.AJAX_JAVA));
         semFourSubjects.add(new SemSubject(getString(R.string.android_app), SubjectConstants.ANDROID_APP));
-        semFourSubjects.add(new SemSubject(getString(R.string.test_android_app), SubjectConstants.TESTING_ANDROID));
+        semFourSubjects.add(new SemSubject(getString(R.string.testing_android), SubjectConstants.TESTING_ANDROID));
         semFourSubjects.add(new SemSubject(getString(R.string.java_web_services), SubjectConstants.JAVA_WEB_SERVICES));
-        semFourSubjects.add(new SemSubject(getString(R.string.cloud_platform_service), SubjectConstants.CLOUD_PLATFORM));
-        semFourSubjects.add(new SemSubject(getString(R.string.EJB), SubjectConstants.EJB));
-        semFourSubjects.add(new SemSubject(getString(R.string.software_engineering), SubjectConstants.SOFT_ENG));
-        semFourSubjects.add(new SemSubject(getString(R.string.software_project), SubjectConstants.MS_PROJECT));
+        semFourSubjects.add(new SemSubject(getString(R.string.cloud_platform), SubjectConstants.CLOUD_PLATFORM));
+        semFourSubjects.add(new SemSubject(getString(R.string.ejb), SubjectConstants.EJB));
+        semFourSubjects.add(new SemSubject(getString(R.string.soft_eng), SubjectConstants.SOFT_ENG));
+        semFourSubjects.add(new SemSubject(getString(R.string.ms_project), SubjectConstants.MS_PROJECT));
         return semFourSubjects;
     }
-
 }

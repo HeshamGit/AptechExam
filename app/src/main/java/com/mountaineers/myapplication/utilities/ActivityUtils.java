@@ -38,5 +38,4 @@ public class ActivityUtils {
         // Fetch the string from resources based on the resource ID
         return context.getResources().getString(resourceId);
     }
-
 }
