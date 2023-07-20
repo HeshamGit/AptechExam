@@ -1,6 +1,7 @@
 package com.mountaineers.myapplication.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.Button;
 
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.models.SampleExam;
-import com.mountaineers.myapplication.utilities.ActivityUtils;
 
 import java.util.List;
 
@@ -77,7 +77,16 @@ public class SampleExamAdapter extends BaseAdapter {
         Class<?> activityClass = sampleExam.getActivityClass();
 
         // Launch the appropriate activity based on subject and sample
-        ActivityUtils.startExamActivity(context, activityClass, subject, sample);
+        startExamActivity(context, activityClass, subject, sample);
+    }
+
+    private void startExamActivity(Context context, Class<?> activityClass, String caller, String sample) {
+        // to go activity
+        Intent intent = new Intent(context, activityClass);
+        //to show the caller activity and sample on the activity
+        intent.putExtra("caller", caller);
+        intent.putExtra(caller, sample);
+        context.startActivity(intent);
     }
 
     static class ViewHolder {
