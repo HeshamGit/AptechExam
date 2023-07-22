@@ -133,7 +133,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getGoogleAppsSampleExams() {
         List<SampleExam> googleAppsExams = new ArrayList<>();
-        addSampleExams(googleAppsExams, 3);
+        addSampleExams(googleAppsExams, 4);
         // googleAppsExams.add(new SampleExam(GalleryActivity.class, "googleAppsImg", "Sample 4"));
         return googleAppsExams;
     }
