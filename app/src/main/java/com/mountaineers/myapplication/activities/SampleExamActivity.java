@@ -173,7 +173,8 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getSEOSampleExams() {
         List<SampleExam> iotExams = new ArrayList<>();
         iotExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        iotExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.seo_pdf), "Sample 2"));
+        iotExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
+        iotExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.seo_pdf), "Sample 3"));
         return iotExams;
     }
 
