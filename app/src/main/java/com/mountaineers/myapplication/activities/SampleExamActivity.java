@@ -195,7 +195,8 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getWebComponentSampleExams() {
         List<SampleExam> webComponentExams = new ArrayList<>();
         webComponentExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        webComponentExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.web_component_pdf), "Sample 2"));
+        webComponentExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
+        webComponentExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.web_component_pdf), "Sample 3"));
         return webComponentExams;
     }
 
