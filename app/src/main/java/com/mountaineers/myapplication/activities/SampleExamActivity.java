@@ -218,7 +218,8 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getAgileSampleExams() {
         List<SampleExam> agileExams = new ArrayList<>();
         agileExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        agileExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.agile_pdf), "Sample 2"));
+        agileExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
+        agileExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.agile_pdf), "Sample 3"));
         return agileExams;
     }
 
