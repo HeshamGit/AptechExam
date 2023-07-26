@@ -240,6 +240,7 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getEJBSampleExams() {
         List<SampleExam> ejbExams = new ArrayList<>();
         ejbExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
+        ejbExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
         return ejbExams;
     }
 
