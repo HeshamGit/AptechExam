@@ -252,7 +252,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getJavaWebServicesSampleExams() {
         List<SampleExam> javaWebServicesExams = new ArrayList<>();
-        addSampleExams(javaWebServicesExams, 3);
+        addSampleExams(javaWebServicesExams, 4);
         return javaWebServicesExams;
     }
 
