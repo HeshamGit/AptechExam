@@ -134,7 +134,6 @@ public class SampleExamActivity extends AppCompatActivity {
     private List<SampleExam> getGoogleAppsSampleExams() {
         List<SampleExam> googleAppsExams = new ArrayList<>();
         addSampleExams(googleAppsExams, 4);
-        // googleAppsExams.add(new SampleExam(GalleryActivity.class, "googleAppsImg", "Sample 4"));
         return googleAppsExams;
     }
 
@@ -194,8 +193,7 @@ public class SampleExamActivity extends AppCompatActivity {
     // semester three exam
     private List<SampleExam> getWebComponentSampleExams() {
         List<SampleExam> webComponentExams = new ArrayList<>();
-        webComponentExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        webComponentExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
+        addSampleExams(webComponentExams, 3);
         webComponentExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.web_component_pdf), "Sample 3"));
         return webComponentExams;
     }
