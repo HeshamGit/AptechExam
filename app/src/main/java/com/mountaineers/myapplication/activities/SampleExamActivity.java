@@ -208,8 +208,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getDevAppJavaSampleExams() {
         List<SampleExam> devAppJavaExams = new ArrayList<>();
-        devAppJavaExams.add(new SampleExam(WebActivity.class, subject, "Sample 1"));
-        devAppJavaExams.add(new SampleExam(WebActivity.class, subject, "Sample 2"));
+        addSampleExams(devAppJavaExams, 3);
         devAppJavaExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.dev_app_java_pdf), "Sample 3"));
         return devAppJavaExams;
     }
