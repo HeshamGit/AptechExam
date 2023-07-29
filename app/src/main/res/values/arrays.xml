@@ -6,12 +6,6 @@
         <item>@drawable/html1</item>
     </integer-array>
 
-    <integer-array name="elementary_c_images">
-        <item>@drawable/elementary_c1</item>
-        <item>@drawable/elementary_c2</item>
-        <item>@drawable/elementary_c3</item>
-    </integer-array>
-
     <integer-array name="sql_server_images">
         <item>@drawable/sql_server1</item>
         <item>@drawable/sql_server2</item>

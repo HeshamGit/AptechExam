@@ -94,8 +94,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getElementaryCSampleExams() {
         List<SampleExam> elementaryCExams = new ArrayList<>();
-        addSampleExams(elementaryCExams, 8);
-        elementaryCExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.elementary_c_images), "Sample 9"));
+        addSampleExams(elementaryCExams, 9);
         return elementaryCExams;
     }
 
