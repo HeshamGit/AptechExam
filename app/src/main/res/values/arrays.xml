@@ -12,10 +12,6 @@
         <item>@drawable/elementary_c3</item>
     </integer-array>
 
-    <integer-array name="xml_images">
-        <item>@drawable/xml1</item>
-    </integer-array>
-
     <integer-array name="sql_server_images">
         <item>@drawable/sql_server1</item>
         <item>@drawable/sql_server2</item>

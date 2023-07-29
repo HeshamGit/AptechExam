@@ -107,8 +107,7 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getXMLSampleExams() {
         List<SampleExam> XMLExams = new ArrayList<>();
-        addSampleExams(XMLExams, 6);
-        XMLExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.xml_images), "Sample 7"));
+        addSampleExams(XMLExams, 7);
         return XMLExams;
     }
 
