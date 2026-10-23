@@ -3,6 +3,8 @@ package com.mountaineers.myapplication.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -44,6 +46,7 @@ public class InteractivePortalActivity extends AppCompatActivity {
         settings.setUseWideViewPort(true);
 
         webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient()); // Enables JS alerts, confirms, and prompt dialogs
         webView.addJavascriptInterface(new AndroidBridge(this), "AndroidBridge");
 
         loadFromIntent(getIntent());
@@ -76,6 +79,22 @@ public class InteractivePortalActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        if (webView != null) {
+            webView.onPause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (webView != null) {
+            webView.onResume();
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         if (webView != null) {
             webView.evaluateJavascript("handleBack();", null);
@@ -87,7 +106,13 @@ public class InteractivePortalActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if (webView != null) {
+            webView.removeJavascriptInterface("AndroidBridge");
+            if (webView.getParent() instanceof ViewGroup) {
+                ((ViewGroup) webView.getParent()).removeView(webView);
+            }
+            webView.removeAllViews();
             webView.destroy();
+            webView = null;
         }
         super.onDestroy();
     }

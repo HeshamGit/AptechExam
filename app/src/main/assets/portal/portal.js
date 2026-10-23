@@ -45,6 +45,17 @@ const SUBJECTS_MANIFEST = [
   { key: "php", title: "Web Application Development using PHP", sem: 4, samples: 4 }
 ];
 
+// Utility: HTML Entity Escaping to prevent HTML tags from rendering blank
+function escapeHtml(str) {
+  if (str == null) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 // App State
 const AppState = {
   currentView: "catalog", // 'catalog', 'portal', 'scorecard', 'practice', 'practice_summary'
@@ -80,6 +91,7 @@ const AppState = {
     streak: 0,
     bestStreak: 0,
     answers: {},       // qIndex -> { selected: idx, isCorrect: bool }
+    multiPending: [],  // for multi-select questions
     autoAdvance: false,
     autoAdvanceTimeout: null,
     isMistakesOnly: false
@@ -158,7 +170,7 @@ function showToast(msg) {
 }
 
 // ========================================================
-// HTML EXAM PARSER
+// HTML EXAM PARSER (Enhanced for 100% Exam Compatibility)
 // ========================================================
 async function loadExamData(subject, sample) {
   let htmlText = "";
@@ -239,20 +251,22 @@ function parseExamHtml(html, subject, sample) {
       }
     }
 
-    // Check for Question prompt row
+    // Check for Question prompt row - robust match across all 173 exams
     const qMatch = txt.match(/^(\d+)\.\s*(.+)/s);
-    if (qMatch && (txt.includes("Mark is") || txt.includes("Difficulty"))) {
+    const isHeaderRow = txt.includes("Aptech Computer Education") || txt.includes("Exam Code:") || txt.includes("Total Marks:");
+
+    if (qMatch && !isHeaderRow) {
       const qNum = parseInt(qMatch[1]);
       const rawPrompt = qMatch[2];
 
-      const markMatch = rawPrompt.match(/\(Mark is ([\d\.]+) - Difficulty\s*is (\d+)\)/);
+      const markMatch = rawPrompt.match(/\(Mark is ([\d\.]+) - Difficulty\s*is (\d+)\)/i);
       const mark = markMatch ? parseFloat(markMatch[1]) : 1.0;
       const difficulty = markMatch ? parseInt(markMatch[2]) : 2;
 
       let cleanPromptHtml = td.innerHTML
         .replace(/^\s*\d+\.\s*/, "")
-        .replace(/\(Mark is [\d\.]+ - Difficulty\s*is \d+\)/, "")
-        .replace(/<br\s*\/?>\s*<br\s*\/?>\s*$/i, "")
+        .replace(/\(Mark is [\d\.]+ - Difficulty\s*is \d+\)/i, "")
+        .replace(/(<br\s*\/?>\s*)+$/gi, "")
         .trim();
 
       currentQ = {
@@ -260,7 +274,7 @@ function parseExamHtml(html, subject, sample) {
         num: qNum,
         module: currentModule,
         promptHtml: cleanPromptHtml,
-        promptText: rawPrompt.replace(/\(Mark is [\d\.]+ - Difficulty\s*is \d+\)/, "").trim(),
+        promptText: rawPrompt.replace(/\(Mark is [\d\.]+ - Difficulty\s*is \d+\)/i, "").trim(),
         mark: mark,
         difficulty: difficulty,
         options: [],
@@ -488,7 +502,7 @@ function renderPortalQuestion() {
   document.getElementById("portalQMarks").textContent = `Mark: ${q.mark} | Diff: ${q.difficulty}`;
   document.getElementById("portalQPrompt").innerHTML = q.promptHtml;
 
-  // Options
+  // Options with HTML escaping to prevent blank tags like <aside>
   const container = document.getElementById("portalOptionsContainer");
   const selectedIndices = AppState.portal.answers[idx] || [];
 
@@ -498,7 +512,7 @@ function renderPortalQuestion() {
     return `
       <label class="option-card-label ${isChecked ? 'selected' : ''}" onclick="onPortalOptionSelect(${oIdx}, event)">
         <input type="${inputType}" name="portal_q_option" class="option-input-ctrl" ${isChecked ? 'checked' : ''} />
-        <span>${opt.text}</span>
+        <span>${escapeHtml(opt.text)}</span>
       </label>
     `;
   }).join("");
@@ -524,9 +538,6 @@ function renderPortalQuestion() {
 }
 
 function onPortalOptionSelect(optIdx, event) {
-  // Prevent duplicate firing on label click
-  if (event.target.tagName.toLowerCase() === "input") return;
-
   triggerHaptic(15);
   const idx = AppState.portal.currentIndex;
   const q = AppState.questions[idx];
@@ -709,7 +720,7 @@ function calculateAndRenderScorecard() {
   const secs = AppState.portal.timeTakenSeconds % 60;
   document.getElementById("metricTime").textContent = `${mins}m ${secs}s`;
 
-  // Render Question by Question Review List
+  // Render Question by Question Review List with HTML escaping
   renderScorecardReviewList();
   showView("scorecard");
 }
@@ -742,14 +753,15 @@ function renderScorecardReviewList() {
             const isRightChoice = correctAns.includes(oIdx);
 
             let pillClass = "";
-            let pillText = opt.text;
+            let escapedText = escapeHtml(opt.text);
+            let pillText = escapedText;
 
             if (isRightChoice) {
               pillClass = "correct-ans";
-              pillText = `✓ [Correct Answer] ${opt.text}`;
+              pillText = `✓ [Correct Answer] ${escapedText}`;
             } else if (isUserChoice) {
               pillClass = "chosen-wrong";
-              pillText = `✗ [Your Choice] ${opt.text}`;
+              pillText = `✗ [Your Choice] ${escapedText}`;
             }
 
             return `<div class="review-opt-pill ${pillClass}">${pillText}</div>`;
@@ -764,19 +776,30 @@ function renderScorecardReviewList() {
 // MODE 2: 1-QUESTION-AT-A-TIME PRACTICE CONTROLLER
 // ========================================================
 function initPracticeMode(mistakesOnly = false) {
+  let filteredQuestions = [...AppState.questions];
+
+  // Capture mistakes BEFORE clearing answers
+  if (mistakesOnly) {
+    const mistakesIndices = Object.keys(AppState.practice.answers)
+      .filter(idx => !AppState.practice.answers[idx].isCorrect)
+      .map(Number);
+    if (mistakesIndices.length > 0) {
+      filteredQuestions = AppState.questions.filter((_, i) => mistakesIndices.includes(i));
+    }
+  }
+
   AppState.practice.isMistakesOnly = mistakesOnly;
   AppState.practice.currentIndex = 0;
   AppState.practice.streak = 0;
   AppState.practice.bestStreak = 0;
   AppState.practice.answers = {};
+  AppState.practice.multiPending = [];
+  AppState.practice.questions = filteredQuestions;
 
-  if (mistakesOnly) {
-    const mistakesIndices = Object.keys(AppState.practice.answers)
-      .filter(idx => !AppState.practice.answers[idx].isCorrect)
-      .map(Number);
-    AppState.practice.questions = AppState.questions.filter((_, i) => mistakesIndices.includes(i));
-  } else {
-    AppState.practice.questions = [...AppState.questions];
+  // Sync auto-advance button label
+  const autoBtn = document.getElementById("btnPracticeAutoAdvance");
+  if (autoBtn) {
+    autoBtn.textContent = AppState.practice.autoAdvance ? "Auto-Next: ON ⚡" : "Auto-Next: OFF";
   }
 
   renderPracticeQuestion();
@@ -813,7 +836,9 @@ function renderPracticeQuestion() {
     let indicator = "";
 
     if (answeredState) {
-      const isUserChoice = (answeredState.selected === oIdx);
+      const isUserChoice = q.isMultiSelect
+        ? (Array.isArray(answeredState.selected) && answeredState.selected.includes(oIdx))
+        : (answeredState.selected === oIdx);
       const isRightChoice = q.correct.includes(oIdx);
 
       if (isRightChoice) {
@@ -823,11 +848,14 @@ function renderPracticeQuestion() {
         btnClass = "is-wrong";
         indicator = "<span>✗ Wrong</span>";
       }
+    } else if (q.isMultiSelect && AppState.practice.multiPending.includes(oIdx)) {
+      btnClass = "is-selected-pending";
+      indicator = "<span>☑ Selected</span>";
     }
 
     return `
       <button class="practice-opt-btn ${btnClass}" ${answeredState ? 'disabled' : ''} onclick="onPracticeOptionClick(${oIdx})">
-        <span>${opt.text}</span>
+        <span>${escapeHtml(opt.text)}</span>
         ${indicator}
       </button>
     `;
@@ -835,17 +863,24 @@ function renderPracticeQuestion() {
 
   // Feedback Banner
   const banner = document.getElementById("practiceFeedbackBanner");
+  const nextBtn = document.getElementById("btnPracticeNext");
+
   if (answeredState) {
     banner.className = `feedback-banner ${answeredState.isCorrect ? 'correct' : 'wrong'}`;
-    const correctOptTexts = q.correct.map(cIdx => q.options[cIdx]?.text).join(", ");
+    const correctOptTexts = q.correct.map(cIdx => escapeHtml(q.options[cIdx]?.text)).join(", ");
     banner.innerHTML = answeredState.isCorrect
       ? `<div><strong>🎉 Spot on!</strong> That is the correct answer.</div>`
       : `<div><strong>💡 Correct Answer:</strong> ${correctOptTexts}</div>`;
     banner.style.display = "flex";
-    document.getElementById("btnPracticeNext").style.display = "inline-flex";
+    nextBtn.style.display = "inline-flex";
+    nextBtn.textContent = (idx === AppState.practice.questions.length - 1) ? "Finish Practice" : "Next Question →";
+  } else if (q.isMultiSelect && AppState.practice.multiPending.length > 0) {
+    banner.style.display = "none";
+    nextBtn.style.display = "inline-flex";
+    nextBtn.textContent = "Check Answers ✓";
   } else {
     banner.style.display = "none";
-    document.getElementById("btnPracticeNext").style.display = "none";
+    nextBtn.style.display = "none";
   }
 }
 
@@ -854,9 +889,32 @@ function onPracticeOptionClick(optIdx) {
   const q = AppState.practice.questions[idx];
   if (AppState.practice.answers[idx]) return;
 
-  const isCorrect = q.correct.includes(optIdx);
+  // Handle Multi-Select Questions
+  if (q.isMultiSelect) {
+    triggerHaptic(15);
+    const pending = AppState.practice.multiPending;
+    if (pending.includes(optIdx)) {
+      AppState.practice.multiPending = pending.filter(i => i !== optIdx);
+    } else {
+      AppState.practice.multiPending = [...pending, optIdx];
+    }
+    renderPracticeQuestion();
+    return;
+  }
 
-  if (isCorrect) {
+  // Single-Select Evaluation
+  evaluatePracticeQuestion([optIdx]);
+}
+
+function evaluatePracticeQuestion(selectedIndices) {
+  const idx = AppState.practice.currentIndex;
+  const q = AppState.practice.questions[idx];
+
+  const correctAnswers = q.correct;
+  const isExactMatch = (selectedIndices.length === correctAnswers.length) &&
+    selectedIndices.every(ans => correctAnswers.includes(ans));
+
+  if (isExactMatch) {
     triggerHaptic(20);
     AppState.practice.streak++;
     if (AppState.practice.streak > AppState.practice.bestStreak) {
@@ -868,14 +926,15 @@ function onPracticeOptionClick(optIdx) {
   }
 
   AppState.practice.answers[idx] = {
-    selected: optIdx,
-    isCorrect: isCorrect
+    selected: q.isMultiSelect ? selectedIndices : selectedIndices[0],
+    isCorrect: isExactMatch
   };
+  AppState.practice.multiPending = [];
 
   renderPracticeQuestion();
 
-  // Auto Advance if enabled and correct
-  if (isCorrect && AppState.practice.autoAdvance) {
+  // Auto Advance if enabled and answer is correct
+  if (isExactMatch && AppState.practice.autoAdvance) {
     AppState.practice.autoAdvanceTimeout = setTimeout(() => {
       onPracticeNext();
     }, 1200);
@@ -886,10 +945,21 @@ function onPracticeNext() {
   triggerHaptic(10);
   if (AppState.practice.autoAdvanceTimeout) {
     clearTimeout(AppState.practice.autoAdvanceTimeout);
+    AppState.practice.autoAdvanceTimeout = null;
+  }
+
+  const idx = AppState.practice.currentIndex;
+  const q = AppState.practice.questions[idx];
+
+  // If multi-select is pending evaluation
+  if (q && q.isMultiSelect && !AppState.practice.answers[idx] && AppState.practice.multiPending.length > 0) {
+    evaluatePracticeQuestion(AppState.practice.multiPending);
+    return;
   }
 
   if (AppState.practice.currentIndex < AppState.practice.questions.length - 1) {
     AppState.practice.currentIndex++;
+    AppState.practice.multiPending = [];
     renderPracticeQuestion();
   } else {
     finishPractice();
@@ -901,6 +971,7 @@ function togglePracticeShuffle() {
   AppState.practice.questions = AppState.practice.questions.sort(() => Math.random() - 0.5);
   AppState.practice.currentIndex = 0;
   AppState.practice.answers = {};
+  AppState.practice.multiPending = [];
   renderPracticeQuestion();
   showToast("Questions shuffled!");
 }
@@ -938,6 +1009,11 @@ function practiceMistakesOnly() {
 
 // Android Back Navigation
 function handleBack() {
+  if (AppState.practice.autoAdvanceTimeout) {
+    clearTimeout(AppState.practice.autoAdvanceTimeout);
+    AppState.practice.autoAdvanceTimeout = null;
+  }
+
   if (AppState.currentView === "portal") {
     if (confirm("Are you sure you want to exit the examination? Your progress will be lost.")) {
       clearInterval(AppState.portal.timerInterval);
