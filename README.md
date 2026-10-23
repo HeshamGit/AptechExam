@@ -50,6 +50,24 @@ All exams for these three aptech courses:
     * Working with Open Source Web Server (Apache)
     * and more...
 
+## Building from Source
+
+### Prerequisites
+- JDK 11 (Gradle 7.0.2 requires Java 11)
+- Android SDK (API 31, Build Tools)
+
+### Build Debug APK
+```bash
+./gradlew assembleDebug
+```
+
+### Build Signed Release APK
+1. Open the project in Android Studio.
+2. Go to **Build** > **Generate Signed Bundle / APK...**
+3. Select **APK** > choose your keystore, alias, and passwords.
+4. Select the **release** variant and check **V1** and **V2** signatures.
+5. Click **Finish**.
+
 ## Authors
 
 Contributors Hesham.
