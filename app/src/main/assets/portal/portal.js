@@ -316,7 +316,14 @@ function parseExamHtml(html, subject, sample) {
         }
       }
 
-      if (currentQ.correct.length > 1 || currentQ.promptText.toLowerCase().includes("choose two") || currentQ.promptText.toLowerCase().includes("choose three")) {
+      const lowerPrompt = currentQ.promptText.toLowerCase();
+      if (
+        currentQ.correct.length > 1 ||
+        /(choose|select)\s+(two|three|four|\d+)/i.test(lowerPrompt) ||
+        lowerPrompt.includes("choose all") ||
+        lowerPrompt.includes("select all") ||
+        lowerPrompt.includes("multiple")
+      ) {
         currentQ.isMultiSelect = true;
       }
     }
@@ -510,10 +517,13 @@ function renderPortalQuestion() {
     const isChecked = selectedIndices.includes(oIdx);
     const inputType = q.isMultiSelect ? "checkbox" : "radio";
     return `
-      <label class="option-card-label ${isChecked ? 'selected' : ''}" onclick="onPortalOptionSelect(${oIdx}, event)">
-        <input type="${inputType}" name="portal_q_option" class="option-input-ctrl" ${isChecked ? 'checked' : ''} />
-        <span>${escapeHtml(opt.text)}</span>
-      </label>
+      <div class="option-card-label ${isChecked ? 'selected' : ''}" 
+           role="${inputType}" 
+           aria-checked="${isChecked}" 
+           onclick="onPortalOptionSelect(${oIdx}, event)">
+        <input type="${inputType}" name="portal_q_option" class="option-input-ctrl" ${isChecked ? 'checked' : ''} tabindex="-1" style="pointer-events: none;" />
+        <span style="pointer-events: none; flex: 1;">${escapeHtml(opt.text)}</span>
+      </div>
     `;
   }).join("");
 
@@ -538,6 +548,10 @@ function renderPortalQuestion() {
 }
 
 function onPortalOptionSelect(optIdx, event) {
+  if (event) {
+    if (typeof event.preventDefault === "function") event.preventDefault();
+    if (typeof event.stopPropagation === "function") event.stopPropagation();
+  }
   triggerHaptic(15);
   const idx = AppState.portal.currentIndex;
   const q = AppState.questions[idx];
@@ -545,7 +559,12 @@ function onPortalOptionSelect(optIdx, event) {
   if (q.isMultiSelect) {
     const current = AppState.portal.answers[idx] || [];
     if (current.includes(optIdx)) {
-      AppState.portal.answers[idx] = current.filter(i => i !== optIdx);
+      const updated = current.filter(i => i !== optIdx);
+      if (updated.length > 0) {
+        AppState.portal.answers[idx] = updated;
+      } else {
+        delete AppState.portal.answers[idx];
+      }
     } else {
       AppState.portal.answers[idx] = [...current, optIdx];
     }
@@ -1007,6 +1026,35 @@ function practiceMistakesOnly() {
   initPracticeMode(true);
 }
 
+// Exit Modal Handlers
+function openExitModal(customTitle, customDesc, onExitCallback) {
+  triggerHaptic(10);
+  const titleEl = document.getElementById("exitModalTitle");
+  const descEl = document.getElementById("exitModalDescription");
+  if (titleEl && customTitle) titleEl.textContent = customTitle;
+  if (descEl && customDesc) descEl.textContent = customDesc;
+  AppState._exitCallback = onExitCallback;
+  const modal = document.getElementById("exitConfirmModal");
+  if (modal) modal.classList.add("open");
+}
+
+function closeExitModal() {
+  const modal = document.getElementById("exitConfirmModal");
+  if (modal) modal.classList.remove("open");
+  AppState._exitCallback = null;
+}
+
+function onConfirmExitExam() {
+  const cb = AppState._exitCallback;
+  closeExitModal();
+  if (typeof cb === "function") {
+    cb();
+  } else {
+    clearInterval(AppState.portal.timerInterval);
+    showView("catalog");
+  }
+}
+
 // Android Back Navigation
 function handleBack() {
   if (AppState.practice.autoAdvanceTimeout) {
@@ -1014,9 +1062,52 @@ function handleBack() {
     AppState.practice.autoAdvanceTimeout = null;
   }
 
+  // 1. Close modals or drawers if open
+  const exitModal = document.getElementById("exitConfirmModal");
+  if (exitModal && exitModal.classList.contains("open")) {
+    closeExitModal();
+    return;
+  }
+
+  const submitModal = document.getElementById("submitConfirmModal");
+  if (submitModal && submitModal.classList.contains("open")) {
+    closeSubmitModal();
+    return;
+  }
+
+  const pickerModal = document.getElementById("examPickerModal");
+  if (pickerModal && pickerModal.classList.contains("open")) {
+    closePickerModal();
+    return;
+  }
+
+  const paletteDrawer = document.getElementById("paletteDrawer");
+  if (paletteDrawer && paletteDrawer.classList.contains("open")) {
+    togglePaletteDrawer();
+    return;
+  }
+
+  // 2. Handle Views
   if (AppState.currentView === "portal") {
-    if (confirm("Are you sure you want to exit the examination? Your progress will be lost.")) {
-      clearInterval(AppState.portal.timerInterval);
+    openExitModal(
+      "Exit Examination?",
+      "Are you sure you want to exit the examination? Your exam progress and answers in this session will be lost.",
+      () => {
+        clearInterval(AppState.portal.timerInterval);
+        showView("catalog");
+      }
+    );
+  } else if (AppState.currentView === "practice") {
+    const answeredCount = Object.keys(AppState.practice.answers).length;
+    if (answeredCount > 0) {
+      openExitModal(
+        "Exit Practice?",
+        "Are you sure you want to exit this practice session? Your current streak and session progress will be reset.",
+        () => {
+          showView("catalog");
+        }
+      );
+    } else {
       showView("catalog");
     }
   } else if (AppState.currentView !== "catalog") {
