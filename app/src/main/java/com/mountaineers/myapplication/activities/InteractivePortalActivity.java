@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -12,6 +13,7 @@ import android.webkit.WebViewClient;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.utilities.AndroidBridge;
 
@@ -45,8 +47,39 @@ public class InteractivePortalActivity extends AppCompatActivity {
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
 
+        WebView.setWebContentsDebuggingEnabled(true);
+
         webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient()); // Enables JS alerts, confirms, and prompt dialogs
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onJsConfirm(WebView view, String url, String message, final JsResult result) {
+                String title = "Exit Examination";
+                if (message != null && !message.toLowerCase().contains("exit") && !message.toLowerCase().contains("progress")) {
+                    title = "Notice";
+                }
+                new MaterialAlertDialogBuilder(InteractivePortalActivity.this)
+                        .setTitle(title)
+                        .setMessage(message)
+                        .setPositiveButton("Exit", (dialog, which) -> result.confirm())
+                        .setNegativeButton("Cancel", (dialog, which) -> result.cancel())
+                        .setOnCancelListener(dialog -> result.cancel())
+                        .setCancelable(true)
+                        .show();
+                return true;
+            }
+
+            @Override
+            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
+                new MaterialAlertDialogBuilder(InteractivePortalActivity.this)
+                        .setTitle("Exam Portal")
+                        .setMessage(message)
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> result.confirm())
+                        .setOnCancelListener(dialog -> result.confirm())
+                        .setCancelable(true)
+                        .show();
+                return true;
+            }
+        });
         webView.addJavascriptInterface(new AndroidBridge(this), "AndroidBridge");
 
         loadFromIntent(getIntent());
