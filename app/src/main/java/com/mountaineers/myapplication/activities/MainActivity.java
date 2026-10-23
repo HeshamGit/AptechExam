@@ -1,5 +1,6 @@
 package com.mountaineers.myapplication.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -18,22 +19,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    //to open sem1 activity
+    // to open the interactive exam & practice portal
+    public void goToInteractivePortal(View view) {
+        Intent intent = new Intent(this, InteractivePortalActivity.class);
+        startActivity(intent);
+    }
+
+    // to open sem1 activity
     public void goToSem1(View view) {
         ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_ONE);
     }
 
-    //to open sem1 activity
+    // to open sem2 activity
     public void goToSem2(View view) {
         ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_TWO);
     }
 
-    //to open sem3 activity
+    // to open sem3 activity
     public void goToSem3(View view) {
         ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_THREE);
     }
 
-    //to open sem4 activity
+    // to open sem4 activity
     public void goToSem4(View view) {
         ActivityUtils.startListActivity(this, SemSubjectActivity.class, SemesterConstants.SEMESTER, SemesterConstants.SEMESTER_FOUR);
     }

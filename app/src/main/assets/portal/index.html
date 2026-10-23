@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aptech Interactive Examination & Practice Portal</title>
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+
+  <!-- Top App Navigation Bar -->
+  <header class="app-top-nav">
+    <div class="nav-brand-group" onclick="handleBack()">
+      <span class="brand-badge">APTECH</span>
+      <span class="nav-title">Exam Portal</span>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme" aria-label="Toggle Theme">
+        <span id="themeIcon">🌙</span>
+      </button>
+      <button class="icon-btn" onclick="handleBack()" title="Back" aria-label="Back">
+        ✕
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       VIEW 1: CATALOG BROWSER
+       ======================================================== -->
+  <main id="view-catalog" class="view-container active">
+    <div class="catalog-content">
+      <div class="catalog-hero">
+        <h1>🎓 Interactive Exam & Practice Center</h1>
+        <p>Master your Aptech CPISM, DISM, and ADSE diploma modular exams with official mock portal simulations and instant question practice.</p>
+        <div class="catalog-mode-pills">
+          <span class="mode-pill-badge">⏱️ Official Timed Portal</span>
+          <span class="mode-pill-badge">⚡ 1-Q-at-a-Time Practice</span>
+          <span class="mode-pill-badge">📊 Scorecards & Review</span>
+        </div>
+      </div>
+
+      <div class="search-filter-wrap">
+        <div class="search-box">
+          <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="catalogSearchInput" class="search-input" placeholder="Search subject or course (e.g. Java, HTML5, Android, EJB, SQL)..." oninput="onSearchInput()" />
+        </div>
+
+        <div class="semester-chips">
+          <button class="sem-chip active" onclick="filterBySem('all', this)">All Semesters</button>
+          <button class="sem-chip" onclick="filterBySem('1', this)">Semester 1 (CPISM)</button>
+          <button class="sem-chip" onclick="filterBySem('2', this)">Semester 2 (DISM)</button>
+          <button class="sem-chip" onclick="filterBySem('3', this)">Semester 3 (ADSE)</button>
+          <button class="sem-chip" onclick="filterBySem('4', this)">Semester 4 (ADSE)</button>
+        </div>
+      </div>
+
+      <div id="subjectsGrid" class="subjects-grid">
+        <!-- Injected via portal.js -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       VIEW 2: MODE 1 - APTECH EXAM PORTAL
+       ======================================================== -->
+  <main id="view-portal" class="view-container">
+    <div class="portal-runner-wrap">
+      <!-- Aptech Top Red Bar -->
+      <div class="portal-top-redbar">
+        <div class="cand-meta">
+          <div class="cand-name-code">
+            <span>Aptech Candidate</span>
+            <span id="portalExamCode" class="code-badge">EXAM-CODE</span>
+          </div>
+          <div class="cand-submeta">
+            Date: <span id="portalExamDate">2026</span> • Online Assessment
+          </div>
+        </div>
+
+        <div class="exam-status-strip">
+          <div style="font-size: 0.8rem; text-align: right; line-height: 1.2;">
+            <div>Ans: <strong id="portalCountAnswered">0</strong> | Rem: <strong id="portalCountRemaining">0</strong></div>
+            <div style="color: #FEF08A;">Flagged: <strong id="portalCountFlagged">0</strong></div>
+          </div>
+          <div id="portalTimerBox" class="timer-box">45:00</div>
+        </div>
+      </div>
+
+      <!-- Aptech Subheader Bar -->
+      <div class="portal-subheader-bar">
+        <span id="portalSubjHeader">Subject Examination</span>
+        <button class="btn-nav-action btn-palette-toggle" style="padding: 0.15rem 0.6rem; min-height: 28px; font-size: 0.75rem;" onclick="togglePaletteDrawer()">
+          📑 Question Palette
+        </button>
+      </div>
+
+      <!-- Question Layout -->
+      <div class="portal-main-layout">
+        <div class="portal-question-area">
+          <div class="q-meta-row">
+            <span id="portalQNumber" class="q-number-title">Question 1 of 20</span>
+            <span id="portalQMarks" class="q-marks-badge">Mark: 1.00</span>
+          </div>
+
+          <div id="portalQPrompt" class="q-prompt-text">
+            <!-- Question text injected here -->
+          </div>
+
+          <div id="portalOptionsContainer" class="options-container">
+            <!-- Options injected here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Portal Bottom Bar -->
+      <footer class="portal-bottom-bar">
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="btnPortalPrev" class="btn-nav-action" onclick="onPortalPrev()">
+            ← Prev
+          </button>
+          <button id="btnPortalClear" class="btn-nav-action" onclick="onPortalClear()">
+            Clear
+          </button>
+          <button id="btnPortalFlag" class="btn-nav-action btn-flag-toggle" onclick="onPortalToggleFlag()">
+            ☆ Mark for Review
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="btnPortalNext" class="btn-nav-action btn-primary-red" onclick="onPortalNext()">
+            Next →
+          </button>
+        </div>
+      </footer>
+
+      <!-- Floating Question Palette Drawer -->
+      <aside id="paletteDrawer" class="palette-drawer">
+        <div class="palette-header">
+          <h4>Question Palette</h4>
+          <button class="icon-btn" onclick="togglePaletteDrawer()">✕</button>
+        </div>
+        <div class="palette-legend">
+          <div class="legend-item"><span class="legend-dot dot-answered"></span> Answered</div>
+          <div class="legend-item"><span class="legend-dot dot-flagged"></span> Flagged</div>
+          <div class="legend-item"><span class="legend-dot dot-unanswered"></span> Visited</div>
+          <div class="legend-item"><span class="legend-dot dot-unvisited"></span> Not Visited</div>
+        </div>
+        <div id="paletteGrid" class="palette-grid">
+          <!-- Numbers injected here -->
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       VIEW 3: SCORECARD / RESULTS
+       ======================================================== -->
+  <main id="view-scorecard" class="view-container">
+    <div class="scorecard-container">
+      <div class="scorecard-card">
+        <div id="scoreCircle" class="score-badge-circle">
+          <span id="scorePercentNumber" class="score-number">85%</span>
+          <span class="score-percent-sign">Score</span>
+        </div>
+
+        <h2 id="verdictTitle" class="verdict-text">EXAMINATION PASSED 🏆</h2>
+        <p id="verdictSubtitle" class="verdict-subtext">You have successfully met the requirement for this module.</p>
+
+        <div class="score-metrics-grid">
+          <div class="metric-box">
+            <div id="metricScore" class="m-val">17.0 / 20.0</div>
+            <div class="m-lbl">Marks Scored</div>
+          </div>
+          <div class="metric-box">
+            <div id="metricCorrect" class="m-val" style="color: var(--color-correct);">14</div>
+            <div class="m-lbl">Correct Answers</div>
+          </div>
+          <div class="metric-box">
+            <div id="metricIncorrect" class="m-val" style="color: var(--color-wrong);">3</div>
+            <div class="m-lbl">Incorrect</div>
+          </div>
+          <div class="metric-box">
+            <div id="metricTime" class="m-val">18m 42s</div>
+            <div class="m-lbl">Time Spent</div>
+          </div>
+        </div>
+
+        <div class="scorecard-actions">
+          <button class="btn-nav-action btn-primary-red" onclick="initPortalMode()">
+            🔄 Retake Exam
+          </button>
+          <button class="btn-nav-action" onclick="showView('catalog')">
+            🏠 Return to Portal Home
+          </button>
+        </div>
+      </div>
+
+      <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 0.75rem;">Detailed Question Review</h3>
+      <div id="scorecardReviewList" class="review-list-wrap">
+        <!-- Detailed review cards injected here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       VIEW 4: MODE 2 - 1-QUESTION-AT-A-TIME PRACTICE
+       ======================================================== -->
+  <main id="view-practice" class="view-container">
+    <div class="practice-container">
+      <div class="practice-header-bar">
+        <span id="practiceProgressText" style="font-weight: 700; font-size: 0.9rem; color: var(--text-secondary);">Question 1 of 20</span>
+        <div class="streak-badge">
+          <span>🔥 Streak:</span>
+          <span id="practiceStreakCount">0</span>
+        </div>
+      </div>
+
+      <div class="practice-progress-wrap">
+        <div id="practiceProgressFill" class="practice-progress-fill" style="width: 5%;"></div>
+      </div>
+
+      <div class="practice-card">
+        <div class="practice-card-meta">
+          <span id="practiceQModule" class="sem-tag">Module</span>
+          <button class="icon-btn" style="min-width: 32px; min-height: 32px;" onclick="togglePracticeShuffle()" title="Shuffle Questions">🔀</button>
+        </div>
+
+        <div id="practiceQPrompt" class="practice-card-prompt">
+          <!-- Question text -->
+        </div>
+
+        <div id="practiceOptionsList" class="practice-options-list">
+          <!-- Option buttons -->
+        </div>
+
+        <div id="practiceFeedbackBanner" class="feedback-banner">
+          <!-- Feedback injected dynamically -->
+        </div>
+
+        <div class="practice-controls-row">
+          <button id="btnPracticeAutoAdvance" class="btn-nav-action" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;" onclick="togglePracticeAutoAdvance()">
+            Auto-Next: OFF
+          </button>
+          <button id="btnPracticeNext" class="btn-nav-action btn-primary-red" style="display: none;" onclick="onPracticeNext()">
+            Next Question →
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       VIEW 5: PRACTICE SUMMARY
+       ======================================================== -->
+  <main id="view-practice_summary" class="view-container">
+    <div class="scorecard-container">
+      <div class="scorecard-card">
+        <h2 class="verdict-text">Practice Complete! 🎉</h2>
+        <p class="verdict-subtext">Great job practicing these exam questions.</p>
+
+        <div class="score-metrics-grid">
+          <div class="metric-box">
+            <div id="practiceSummaryScore" class="m-val">15 / 20</div>
+            <div class="m-lbl">Questions Mastered</div>
+          </div>
+          <div class="metric-box">
+            <div id="practiceSummaryAccuracy" class="m-val" style="color: var(--color-accent);">75%</div>
+            <div class="m-lbl">Accuracy</div>
+          </div>
+          <div class="metric-box">
+            <div id="practiceSummaryStreak" class="m-val" style="color: #EA580C;">5</div>
+            <div class="m-lbl">Best Streak</div>
+          </div>
+        </div>
+
+        <div class="scorecard-actions">
+          <button id="btnPracticeReviewMistakes" class="btn-nav-action" style="border-color: var(--color-wrong); color: var(--color-wrong);" onclick="practiceMistakesOnly()">
+            🎯 Review Mistakes Only
+          </button>
+          <button class="btn-nav-action btn-primary-red" onclick="initPracticeMode(false)">
+            🔄 Restart Practice
+          </button>
+          <button class="btn-nav-action" onclick="showView('catalog')">
+            🏠 Return to Portal Home
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       MODAL 1: EXAM & MODE PICKER
+       ======================================================== -->
+  <div id="examPickerModal" class="modal-overlay" onclick="if(event.target === this) closePickerModal()">
+    <div class="modal-bottom-sheet">
+      <div class="sheet-header">
+        <h3 id="modalSubjTitle">Subject Title</h3>
+        <button class="icon-btn" onclick="closePickerModal()">✕</button>
+      </div>
+      <div class="sheet-body">
+        <div class="sample-selector-group">
+          <span class="section-label">Select Exam Sample:</span>
+          <div id="samplePillsContainer" class="sample-pills-row">
+            <!-- Injected sample buttons -->
+          </div>
+        </div>
+
+        <span class="section-label">Choose Interactive Mode:</span>
+        <div class="mode-cards-grid">
+          <div class="mode-select-card" onclick="startChosenExam('portal')">
+            <div class="mode-card-icon">🎓</div>
+            <div class="mode-card-info">
+              <h4>Official Aptech Exam Portal</h4>
+              <p>Authentic timed exam simulation with question palette, review flags, and final scorecard.</p>
+            </div>
+          </div>
+
+          <div class="mode-select-card" onclick="startChosenExam('practice')">
+            <div class="mode-card-icon">⚡</div>
+            <div class="mode-card-info">
+              <h4>Instant Practice Quiz</h4>
+              <p>Practice 1 question at a time with instant answer validation, streak counters, and mistake review.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 2: CONFIRM SUBMIT
+       ======================================================== -->
+  <div id="submitConfirmModal" class="modal-overlay" onclick="if(event.target === this) closeSubmitModal()">
+    <div class="modal-bottom-sheet" style="max-width: 480px;">
+      <div class="sheet-header">
+        <h3>Submit Examination?</h3>
+        <button class="icon-btn" onclick="closeSubmitModal()">✕</button>
+      </div>
+      <div class="sheet-body">
+        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+          Review your examination summary before submitting. Once submitted, your answers will be evaluated.
+        </p>
+        <div class="score-metrics-grid" style="margin-bottom: 1.5rem;">
+          <div class="metric-box">
+            <div id="submitModalTotal" class="m-val">20</div>
+            <div class="m-lbl">Total</div>
+          </div>
+          <div class="metric-box">
+            <div id="submitModalAnswered" class="m-val" style="color: var(--color-correct);">18</div>
+            <div class="m-lbl">Answered</div>
+          </div>
+          <div class="metric-box">
+            <div id="submitModalUnanswered" class="m-val" style="color: var(--color-wrong);">2</div>
+            <div class="m-lbl">Unanswered</div>
+          </div>
+          <div class="metric-box">
+            <div id="submitModalFlagged" class="m-val" style="color: var(--color-flag);">1</div>
+            <div class="m-lbl">Flagged</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+          <button class="btn-nav-action" onclick="closeSubmitModal()">
+            Return to Exam
+          </button>
+          <button class="btn-nav-action btn-primary-red" onclick="onConfirmSubmitExam()">
+            Confirm Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="portal.js"></script>
+</body>
+</html>
