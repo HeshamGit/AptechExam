@@ -8,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.mountaineers.myapplication.R;
+import com.mountaineers.myapplication.activities.InteractivePortalActivity;
+import com.mountaineers.myapplication.activities.WebActivity;
 import com.mountaineers.myapplication.models.SampleExam;
 
 import java.util.List;
@@ -68,7 +72,6 @@ public class SampleExamAdapter extends BaseAdapter {
     }
 
     private void handleSampleExamClick(SampleExam sampleExam) {
-
         // get subject name
         String subject = sampleExam.getSubject();
         // get the sample name and Convert it to lowercase without spaces
@@ -76,8 +79,38 @@ public class SampleExamAdapter extends BaseAdapter {
         // get the activity class
         Class<?> activityClass = sampleExam.getActivityClass();
 
-        // Launch the appropriate activity based on subject and sample
-        startExamActivity(context, activityClass, subject, sample);
+        // For HTML exams, provide the choice between Interactive Portal, Practice Quiz, or Classic Mode
+        if (activityClass == WebActivity.class) {
+            CharSequence[] options = new CharSequence[]{
+                    "🎓 Official Aptech Exam Portal (Timed)",
+                    "⚡ Instant Practice (1-Question-at-a-Time)",
+                    "📖 Classic Study Mode (Answers Shown)"
+            };
+
+            new AlertDialog.Builder(context)
+                    .setTitle(sampleExam.getSampleName() + " - Select Mode")
+                    .setItems(options, (dialog, which) -> {
+                        if (which == 0) {
+                            Intent intent = new Intent(context, InteractivePortalActivity.class);
+                            intent.putExtra(InteractivePortalActivity.EXTRA_SUBJECT, subject);
+                            intent.putExtra(InteractivePortalActivity.EXTRA_SAMPLE, sample);
+                            intent.putExtra(InteractivePortalActivity.EXTRA_MODE, "portal");
+                            context.startActivity(intent);
+                        } else if (which == 1) {
+                            Intent intent = new Intent(context, InteractivePortalActivity.class);
+                            intent.putExtra(InteractivePortalActivity.EXTRA_SUBJECT, subject);
+                            intent.putExtra(InteractivePortalActivity.EXTRA_SAMPLE, sample);
+                            intent.putExtra(InteractivePortalActivity.EXTRA_MODE, "practice");
+                            context.startActivity(intent);
+                        } else {
+                            startExamActivity(context, activityClass, subject, sample);
+                        }
+                    })
+                    .show();
+        } else {
+            // Launch image gallery or direct activity
+            startExamActivity(context, activityClass, subject, sample);
+        }
     }
 
     private void startExamActivity(Context context, Class<?> activityClass, String caller, String sample) {
@@ -97,4 +130,3 @@ public class SampleExamAdapter extends BaseAdapter {
         }
     }
 }
-

@@ -10,5 +10,8 @@
     <color name="darkBlack">#07111a</color>
     <color name="lightBlack">#0c1925</color>
 
+    <color name="aptech_red">#A51C24</color>
+    <color name="aptech_red_dark">#7A141A</color>
+
     <color name="ic_launcher_background">#3CA7DC</color>
 </resources>
