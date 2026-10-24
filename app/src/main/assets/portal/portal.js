@@ -166,6 +166,17 @@ function triggerHaptic(duration = 20) {
 function showToast(msg) {
   if (window.AndroidBridge && typeof window.AndroidBridge.showToast === "function") {
     window.AndroidBridge.showToast(msg);
+  } else {
+    let toast = document.getElementById("webToastNotification");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "webToastNotification";
+      toast.className = "web-toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2600);
   }
 }
 
@@ -185,14 +196,28 @@ async function loadExamData(subject, sample) {
     }
   }
 
-  // 2. Fallback to standard fetch
+  // 2. Fallback to standard fetch across web environments (root, portal subfolder, and absolute)
   if (!htmlText) {
-    const url = "../" + relativePath;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to load ${url} (${response.status})`);
+    const candidateUrls = [
+      relativePath,
+      "./" + relativePath,
+      "../" + relativePath
+    ];
+    let lastError = null;
+    for (const url of candidateUrls) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          htmlText = await response.text();
+          break;
+        }
+      } catch (e) {
+        lastError = e;
+      }
     }
-    htmlText = await response.text();
+    if (!htmlText) {
+      throw new Error(`Failed to load ${relativePath}${lastError ? ": " + lastError.message : ""}`);
+    }
   }
 
   return parseExamHtml(htmlText, subject, sample);
@@ -412,6 +437,19 @@ function closePickerModal() {
 
 function startChosenExam(mode) {
   closePickerModal();
+  if (mode === "classic") {
+    const relativePath = selectedPickerSubject.key + "/" + selectedPickerSample + ".htm";
+    if (window.AndroidBridge && typeof window.AndroidBridge.openClassicExam === "function") {
+      window.AndroidBridge.openClassicExam(selectedPickerSubject.key, selectedPickerSample);
+    } else {
+      const isSubfolder = window.location.pathname.endsWith("/portal/") || 
+                          window.location.pathname.endsWith("/portal/index.html") ||
+                          window.location.pathname.includes("/portal/");
+      const targetUrl = isSubfolder ? "../" + relativePath : "./" + relativePath;
+      window.open(targetUrl, "_blank");
+    }
+    return;
+  }
   startExam(selectedPickerSubject.key, selectedPickerSample, mode);
 }
 
@@ -1115,6 +1153,8 @@ function handleBack() {
   } else {
     if (window.AndroidBridge && typeof window.AndroidBridge.exitPortal === "function") {
       window.AndroidBridge.exitPortal();
+    } else {
+      showToast("You are already on the Exam Catalog.");
     }
   }
 }

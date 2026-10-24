@@ -4,18 +4,19 @@
 ### The Ultimate Exam Preparation & Interactive Practice Portal for Aptech Students
 
 [![Android](https://img.shields.io/badge/Platform-Android%205.0%2B%20(API%2021%2B)-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
+[![Web](https://img.shields.io/badge/Web%20Portal-GitHub%20Pages-E11D48?style=for-the-badge&logo=googlechrome&logoColor=white)](https://heshamgit.github.io/AptechExam/)
 [![Java](https://img.shields.io/badge/Language-Java%2011-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.java.net/)
 [![Gradle](https://img.shields.io/badge/Build-Gradle%207.0.2-02303A?style=for-the-badge&logo=gradle&logoColor=white)](https://gradle.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![Offline](https://img.shields.io/badge/Network-100%25%20Offline-success?style=for-the-badge&logo=offline&logoColor=white)](#offline-first-architecture)
 
 <p align="center">
-  <b>A comprehensive, open-source Android study platform specifically engineered for Aptech Computer Education students pursuing CPISM, DISM, and ADSE (ACCP) diplomas.</b>
+  <b>A comprehensive, open-source Android & Web study platform specifically engineered for Aptech Computer Education students pursuing CPISM, DISM, and ADSE (ACCP) diplomas.</b>
   <br>
   Featuring real-time timed exam simulations, adaptive 1-question practice with streaks, and complete verified past papers.
 </p>
 
-[📥 Download Latest APK](#-download--installation) • [✨ Key Features](#-key-features) • [📱 Three Study Modes](#-three-distinct-study-modes) • [📚 Curriculum Covered](#-complete-curriculum-coverage) • [🛠️ Build from Source](#-building-from-source)
+[🌐 Try Online (No Install)](https://heshamgit.github.io/AptechExam/) • [📥 Download Latest APK](#-download--installation) • [✨ Key Features](#-key-features) • [📱 Three Study Modes](#-three-distinct-study-modes) • [📚 Curriculum Covered](#-complete-curriculum-coverage) • [🛠️ Build from Source](#-building-from-source)
 
 ---
 
@@ -38,6 +39,22 @@
 | *Seamless Material Bottom Sheet for selecting your preferred study mode.* | *Instant search and quick launch across all 4 semesters and subjects.* |
 
 </div>
+
+---
+
+## 🌐 Try Online via GitHub Pages
+
+Don't have an Android device nearby or want to preview the exams before downloading the APK? Access the fully-functional web edition directly in your browser:
+
+<div align="center">
+
+[![Launch Interactive Exam Portal](https://img.shields.io/badge/Launch%20Interactive%20Exam%20Portal-heshamgit.github.io%2FAptechExam-10B981?style=for-the-badge&logo=googlechrome&logoColor=white)](https://heshamgit.github.io/AptechExam/)
+
+</div>
+
+* **⚡ Instant Browser Practice:** Complete access to all 30 semester subjects, 170+ verified past papers, timed examination modes, and instant recall drills.
+* **🔒 100% Client-Side & Private:** All parsing and evaluation execute directly in your browser without telemetry, tracking, or user registration.
+* **🔄 Continuous GitHub Actions CI/CD:** Any updates to question banks or exam manifests are automatically validated, packaged, and deployed to GitHub Pages via `.github/workflows/deploy-pages.yml`.
 
 ---
 
