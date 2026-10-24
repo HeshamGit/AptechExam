@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#091218</color>
+
+    <!-- Dialog and Card Semantic Colors for Night -->
+    <color name="sheet_bg">#181F26</color>
+    <color name="card_bg">#202934</color>
+    <color name="card_border">#334155</color>
+    <color name="text_dialog_primary">#F8FAFC</color>
+    <color name="text_dialog_secondary">#94A3B8</color>
+    <color name="sheet_handle">#475569</color>
+    <color name="amber_sun">#FBBF24</color>
 </resources>

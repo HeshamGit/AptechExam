@@ -2,14 +2,17 @@ package com.mountaineers.myapplication.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.activities.InteractivePortalActivity;
 import com.mountaineers.myapplication.activities.WebActivity;
@@ -51,7 +54,6 @@ public class SampleExamAdapter extends BaseAdapter {
         if (convertView == null) {
             // If convertView is null, inflate the layout and create a new ViewHolder
             convertView = inflater.inflate(R.layout.list_item_exam, parent, false);
-
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
@@ -81,32 +83,51 @@ public class SampleExamAdapter extends BaseAdapter {
 
         // For HTML exams, provide the choice between Interactive Portal, Practice Quiz, or Classic Mode
         if (activityClass == WebActivity.class) {
-            CharSequence[] options = new CharSequence[]{
-                    "🎓 Official Aptech Exam Portal (Timed)",
-                    "⚡ Instant Practice (1-Question-at-a-Time)",
-                    "📖 Classic Study Mode (Answers Shown)"
-            };
+            BottomSheetDialog bottomSheet = new BottomSheetDialog(context);
+            View sheetView = inflater.inflate(R.layout.dialog_mode_picker, null);
+            bottomSheet.setContentView(sheetView);
 
-            new AlertDialog.Builder(context)
-                    .setTitle(sampleExam.getSampleName() + " - Select Mode")
-                    .setItems(options, (dialog, which) -> {
-                        if (which == 0) {
-                            Intent intent = new Intent(context, InteractivePortalActivity.class);
-                            intent.putExtra(InteractivePortalActivity.EXTRA_SUBJECT, subject);
-                            intent.putExtra(InteractivePortalActivity.EXTRA_SAMPLE, sample);
-                            intent.putExtra(InteractivePortalActivity.EXTRA_MODE, "portal");
-                            context.startActivity(intent);
-                        } else if (which == 1) {
-                            Intent intent = new Intent(context, InteractivePortalActivity.class);
-                            intent.putExtra(InteractivePortalActivity.EXTRA_SUBJECT, subject);
-                            intent.putExtra(InteractivePortalActivity.EXTRA_SAMPLE, sample);
-                            intent.putExtra(InteractivePortalActivity.EXTRA_MODE, "practice");
-                            context.startActivity(intent);
-                        } else {
-                            startExamActivity(context, activityClass, subject, sample);
-                        }
-                    })
-                    .show();
+            // Ensure window and parent frame have transparent background so rounded corners render cleanly
+            if (bottomSheet.getWindow() != null) {
+                bottomSheet.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            }
+            bottomSheet.setOnShowListener(dialog -> {
+                BottomSheetDialog d = (BottomSheetDialog) dialog;
+                FrameLayout bottomSheetLayout = d.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+                if (bottomSheetLayout != null) {
+                    bottomSheetLayout.setBackground(new ColorDrawable(Color.TRANSPARENT));
+                }
+            });
+
+            TextView tvTitle = sheetView.findViewById(R.id.tvModePickerTitle);
+            if (tvTitle != null) {
+                tvTitle.setText(sampleExam.getSampleName() + " • Choose Study Mode");
+            }
+
+            sheetView.findViewById(R.id.btnModePortal).setOnClickListener(v -> {
+                bottomSheet.dismiss();
+                Intent intent = new Intent(context, InteractivePortalActivity.class);
+                intent.putExtra(InteractivePortalActivity.EXTRA_SUBJECT, subject);
+                intent.putExtra(InteractivePortalActivity.EXTRA_SAMPLE, sample);
+                intent.putExtra(InteractivePortalActivity.EXTRA_MODE, "portal");
+                context.startActivity(intent);
+            });
+
+            sheetView.findViewById(R.id.btnModePractice).setOnClickListener(v -> {
+                bottomSheet.dismiss();
+                Intent intent = new Intent(context, InteractivePortalActivity.class);
+                intent.putExtra(InteractivePortalActivity.EXTRA_SUBJECT, subject);
+                intent.putExtra(InteractivePortalActivity.EXTRA_SAMPLE, sample);
+                intent.putExtra(InteractivePortalActivity.EXTRA_MODE, "practice");
+                context.startActivity(intent);
+            });
+
+            sheetView.findViewById(R.id.btnModeClassic).setOnClickListener(v -> {
+                bottomSheet.dismiss();
+                startExamActivity(context, activityClass, subject, sample);
+            });
+
+            bottomSheet.show();
         } else {
             // Launch image gallery or direct activity
             startExamActivity(context, activityClass, subject, sample);

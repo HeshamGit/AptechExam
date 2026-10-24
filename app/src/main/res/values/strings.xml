@@ -95,8 +95,8 @@
     <!-- sample exam list -->
 
     <!-- toggle btn them text-->
-    <string name="dark_mode">DarkMode</string>
-    <string name="light_mode">LightMode</string>
+    <string name="dark_mode">Dark</string>
+    <string name="light_mode">Light</string>
     <string name="default_exam_title">Aptech Exam Sample List</string>
     <string name="default_semester_title">Aptech Semester Exams</string>
     <string name="default_btn_title">sample</string>

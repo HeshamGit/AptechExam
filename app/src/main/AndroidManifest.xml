@@ -15,7 +15,7 @@
         <activity
             android:name=".activities.InteractivePortalActivity"
             android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".activities.GalleryActivity"
             android:exported="false" />
@@ -36,6 +36,7 @@
         </activity>
         <activity
             android:name=".activities.WebActivity"
+            android:exported="false"
             android:configChanges="locale|keyboard|keyboardHidden|orientation|screenSize"
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />

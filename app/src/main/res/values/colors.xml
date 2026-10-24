@@ -14,4 +14,13 @@
     <color name="aptech_red_dark">#7A141A</color>
 
     <color name="ic_launcher_background">#3CA7DC</color>
+
+    <!-- Dialog and Card Semantic Colors -->
+    <color name="sheet_bg">#FFFFFF</color>
+    <color name="card_bg">#F8F9FA</color>
+    <color name="card_border">#E2E8F0</color>
+    <color name="text_dialog_primary">#0F172A</color>
+    <color name="text_dialog_secondary">#64748B</color>
+    <color name="sheet_handle">#CBD5E1</color>
+    <color name="amber_sun">#F59E0B</color>
 </resources>
