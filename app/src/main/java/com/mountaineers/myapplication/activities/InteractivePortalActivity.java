@@ -11,9 +11,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.utilities.AndroidBridge;
 
@@ -57,7 +57,7 @@ public class InteractivePortalActivity extends AppCompatActivity {
                 if (message != null && !message.toLowerCase().contains("exit") && !message.toLowerCase().contains("progress")) {
                     title = "Notice";
                 }
-                new MaterialAlertDialogBuilder(InteractivePortalActivity.this)
+                new AlertDialog.Builder(InteractivePortalActivity.this)
                         .setTitle(title)
                         .setMessage(message)
                         .setPositiveButton("Exit", (dialog, which) -> result.confirm())
@@ -70,7 +70,7 @@ public class InteractivePortalActivity extends AppCompatActivity {
 
             @Override
             public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-                new MaterialAlertDialogBuilder(InteractivePortalActivity.this)
+                new AlertDialog.Builder(InteractivePortalActivity.this)
                         .setTitle("Exam Portal")
                         .setMessage(message)
                         .setPositiveButton(android.R.string.ok, (dialog, which) -> result.confirm())
