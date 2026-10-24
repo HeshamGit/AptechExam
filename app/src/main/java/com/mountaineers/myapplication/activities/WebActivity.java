@@ -1,11 +1,10 @@
 package com.mountaineers.myapplication.activities;
 
-
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.widget.ToggleButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -16,11 +15,11 @@ import androidx.webkit.WebViewFeature;
 import com.mountaineers.myapplication.R;
 import com.mountaineers.myapplication.databinding.ActivityWebBinding;
 
-
 public class WebActivity extends AppCompatActivity {
     private ActivityWebBinding binding;
     private String caller;
     private String sample;
+    private boolean isDarkMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,18 +70,32 @@ public class WebActivity extends AppCompatActivity {
                 actionBar.setDisplayShowCustomEnabled(true);
             }
 
-            //casting the toggleButton
-            ToggleButton toggleButton = findViewById(R.id.toggle_btn);
+            TextView toggleBtn = findViewById(R.id.btn_theme_toggle);
+            if (toggleBtn == null) return;
+
+            // Initialize state based on system mode
+            isDarkMode = (nightModeFlags == Configuration.UI_MODE_NIGHT_YES);
+            updateThemeButtonState(toggleBtn, isDarkMode);
+            setWebViewForceDarkMode(isDarkMode);
 
             // Toggle the web view between dark and light mode based on the toggle state
-            toggleButton.setOnCheckedChangeListener((buttonView, isChecked) ->
-                    setWebViewForceDarkMode(isChecked));
+            toggleBtn.setOnClickListener(v -> {
+                isDarkMode = !isDarkMode;
+                updateThemeButtonState(toggleBtn, isDarkMode);
+                setWebViewForceDarkMode(isDarkMode);
+            });
+        }
+    }
 
-            // Check if the system is in dark mode and set the toggle and web view accordingly
-            if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-                toggleButton.setChecked(true);
-                setWebViewForceDarkMode(true);
-            }
+    private void updateThemeButtonState(TextView btn, boolean darkMode) {
+        if (darkMode) {
+            btn.setText(R.string.light_mode);
+            btn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_mode_light, 0, 0, 0);
+            btn.setContentDescription("Switch to Light Mode");
+        } else {
+            btn.setText(R.string.dark_mode);
+            btn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_mode_night, 0, 0, 0);
+            btn.setContentDescription("Switch to Dark Mode");
         }
     }
 
@@ -105,7 +118,6 @@ public class WebActivity extends AppCompatActivity {
             binding.ExamView.loadUrl(url);
         }
     }
-
 
     //save the state of web view
     @Override
