@@ -258,8 +258,8 @@ public class SampleExamActivity extends AppCompatActivity {
 
     private List<SampleExam> getAndroidAppSampleExams() {
         List<SampleExam> androidAppExams = new ArrayList<>();
-        addSampleExams(androidAppExams, 5);
-        androidAppExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.android_app_images), "Sample 5"));
+        addSampleExams(androidAppExams, 6);
+        androidAppExams.add(new SampleExam(GalleryActivity.class, String.valueOf(R.array.android_app_images), "Sample 7"));
         return androidAppExams;
     }
 
