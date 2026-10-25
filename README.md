@@ -135,7 +135,7 @@ To help students succeed across their entire diploma journey, this interactive p
 | :--- | :--- | :---: | :--- |
 | 📱 **[AptechExam (This Repo)](https://github.com/HeshamGit/AptechExam)** | **Interactive Exam Simulation & Practice Portal**<br>Simulate authentic 45-min Aptech exams, take 1-Q instant recall drills with streaks, or read past papers offline with dark mode. | Android APK + Web | [🌐 Live Web Portal](https://heshamgit.github.io/AptechExam/) • [📥 Download APK](https://github.com/HeshamGit/AptechExam/releases/latest) |
 | 📝 **[aptech-exam](https://github.com/HeshamGit/aptech-exam)** | **Comprehensive Exam Archive & Question Banks**<br>Raw past exam papers, sample PDFs, structured HTML question tables, and verified keys across all 4 semesters. | HTML, PDF, PNG | [GitHub Repo](https://github.com/HeshamGit/aptech-exam) |
-| 📚 **[aptech-book](https://github.com/HeshamGit/aptech-book)** | **Official Textbooks & Lecture Slides**<br>Official modular course books, reference guides, lecture slide decks, and study notes. | PDF, PPTX | [GitHub Repo](https://github.com/HeshamGit/aptech-book) |
+| 📚 **[aptech-book](https://github.com/HeshamGit/aptech-book)** | **Official Textbooks & Lecture Slides**<br>Official modular course books, reference guides, lecture slide decks, and study notes. | PDF | [GitHub Repo](https://github.com/HeshamGit/aptech-book) |
 
 ---
 
