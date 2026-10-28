@@ -37,8 +37,8 @@ const SUBJECTS_MANIFEST = [
   { key: "ejb", title: "Enterprise Application Development (EJB)", sem: 4, samples: 2 },
   { key: "cloud_platform", title: "Working with Cloud Platform Services", sem: 4, samples: 5 },
   { key: "java_web_services", title: "Creating Services for Web (JAX-WS)", sem: 4, samples: 4 },
-  { key: "testing_android", title: "Testing Android Applications", sem: 4, samples: 2 },
-  { key: "android_app", title: "Developing Mobile Apps using Android", sem: 4, samples: 6 },
+  { key: "testing_android", title: "Testing Android Applications", sem: 4, samples: 3 },
+  { key: "android_app", title: "Developing Mobile Apps using Android", sem: 4, samples: 7 },
   { key: "ajax_java", title: "Rich Internet Applications (AJAX Java)", sem: 4, samples: 3 },
   { key: "mysql", title: "Querying with MySQL Database", sem: 4, samples: 13 },
   { key: "apache", title: "Working with Open Source Web Server", sem: 4, samples: 12 },
@@ -277,7 +277,7 @@ function parseExamHtml(html, subject, sample) {
     }
 
     // Check for Question prompt row - robust match across all 173 exams
-    const qMatch = txt.match(/^(\d+)\.\s*(.+)/s);
+    const qMatch = txt.match(/^(\d+)\.\s+(.+)/s);
     const isHeaderRow = txt.includes("Aptech Computer Education") || txt.includes("Exam Code:") || txt.includes("Total Marks:");
 
     if (qMatch && !isHeaderRow) {
